@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Doors</string>
+    <string name="wood_door">Межкомнатные двери</string>
+    <string name="metal_door">Входные двери</string>
+    <string name="we_on_map">Мы на карте</string>
+    <string name="about_us">О нас</string>
+</resources>
