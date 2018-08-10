@@ -11,19 +11,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/app_padding"
-        android:paddingEnd="@dimen/app_padding"
         android:background="@android:color/white">
 
-        <TextView
+        <ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
             android:gravity="center|start"
             android:textColor="@android:color/black"
-            android:text="@{viewModel.type}"
-            android:layout_marginBottom="10dp">
-        </TextView>
+            android:text="@{viewModel.type}">
+        </ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView>
 
         <View
             style="@style/Divider"

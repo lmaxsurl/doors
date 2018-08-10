@@ -28,14 +28,14 @@ public class AppDatabase_Impl extends AppDatabase {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `descriptions` (`id` INTEGER NOT NULL, `description` TEXT, PRIMARY KEY(`id`))");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `DoorResponse` (`title` TEXT NOT NULL, `doorUrl` TEXT, `type` TEXT, `description` TEXT, PRIMARY KEY(`title`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0875bbd3786968e6645aad69d4db2bf8\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4395642aa6b743db441bef36d78f6c05\")");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("DROP TABLE IF EXISTS `descriptions`");
+        _db.execSQL("DROP TABLE IF EXISTS `DoorResponse`");
       }
 
       @Override
@@ -60,20 +60,22 @@ public class AppDatabase_Impl extends AppDatabase {
 
       @Override
       protected void validateMigration(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsDescriptions = new HashMap<String, TableInfo.Column>(2);
-        _columnsDescriptions.put("id", new TableInfo.Column("id", "INTEGER", true, 1));
-        _columnsDescriptions.put("description", new TableInfo.Column("description", "TEXT", false, 0));
-        final HashSet<TableInfo.ForeignKey> _foreignKeysDescriptions = new HashSet<TableInfo.ForeignKey>(0);
-        final HashSet<TableInfo.Index> _indicesDescriptions = new HashSet<TableInfo.Index>(0);
-        final TableInfo _infoDescriptions = new TableInfo("descriptions", _columnsDescriptions, _foreignKeysDescriptions, _indicesDescriptions);
-        final TableInfo _existingDescriptions = TableInfo.read(_db, "descriptions");
-        if (! _infoDescriptions.equals(_existingDescriptions)) {
-          throw new IllegalStateException("Migration didn't properly handle descriptions(logunov.maxim.data.entity.DescriptionResponse).\n"
-                  + " Expected:\n" + _infoDescriptions + "\n"
-                  + " Found:\n" + _existingDescriptions);
+        final HashMap<String, TableInfo.Column> _columnsDoorResponse = new HashMap<String, TableInfo.Column>(4);
+        _columnsDoorResponse.put("title", new TableInfo.Column("title", "TEXT", true, 1));
+        _columnsDoorResponse.put("doorUrl", new TableInfo.Column("doorUrl", "TEXT", false, 0));
+        _columnsDoorResponse.put("type", new TableInfo.Column("type", "TEXT", false, 0));
+        _columnsDoorResponse.put("description", new TableInfo.Column("description", "TEXT", false, 0));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysDoorResponse = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesDoorResponse = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoDoorResponse = new TableInfo("DoorResponse", _columnsDoorResponse, _foreignKeysDoorResponse, _indicesDoorResponse);
+        final TableInfo _existingDoorResponse = TableInfo.read(_db, "DoorResponse");
+        if (! _infoDoorResponse.equals(_existingDoorResponse)) {
+          throw new IllegalStateException("Migration didn't properly handle DoorResponse(logunov.maxim.data.entity.DoorResponse).\n"
+                  + " Expected:\n" + _infoDoorResponse + "\n"
+                  + " Found:\n" + _existingDoorResponse);
         }
       }
-    }, "0875bbd3786968e6645aad69d4db2bf8", "6ef1985fe81642e5424ba0338fb39005");
+    }, "4395642aa6b743db441bef36d78f6c05", "02171cae0134dd32082fe34148ed91a3");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -84,7 +86,7 @@ public class AppDatabase_Impl extends AppDatabase {
 
   @Override
   protected InvalidationTracker createInvalidationTracker() {
-    return new InvalidationTracker(this, "descriptions");
+    return new InvalidationTracker(this, "DoorResponse");
   }
 
   @Override
@@ -93,7 +95,7 @@ public class AppDatabase_Impl extends AppDatabase {
     final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
     try {
       super.beginTransaction();
-      _db.execSQL("DELETE FROM `descriptions`");
+      _db.execSQL("DELETE FROM `DoorResponse`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();

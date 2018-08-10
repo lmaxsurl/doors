@@ -15,21 +15,17 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
 
     public ObservableBoolean progressBar = new ObservableBoolean(true);
 
-    public ObservableBoolean nightMode = new ObservableBoolean(false);
+    public ObservableBoolean isConnected = new ObservableBoolean(true);
 
-    public void enableNightMode(){
-        nightMode.set(true);
+    public void setIsConnected(Boolean isConnected) {
+        this.isConnected.set(isConnected);
     }
 
-    public void disableNightMode(){
-        nightMode.set(false);
-    }
-
-    public void showProgressBar(){
+    public void showProgressBar() {
         progressBar.set(true);
     }
 
-    public void dismissProgressBar(){
+    public void dismissProgressBar() {
         progressBar.set(false);
     }
 
@@ -37,16 +33,16 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
         runInject();
     }
 
-    public void addRouter(R router){
+    public void addRouter(R router) {
         this.router = router;
     }
 
-    public void removeRouter(){
+    public void removeRouter() {
         router = null;
     }
 
     public CompositeDisposable getCompositeDisposable() {
-        if(compositeDisposable == null) {
+        if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
 
@@ -56,7 +52,7 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        if(compositeDisposable != null
+        if (compositeDisposable != null
                 && !compositeDisposable.isDisposed()) {
             compositeDisposable.dispose();
         }

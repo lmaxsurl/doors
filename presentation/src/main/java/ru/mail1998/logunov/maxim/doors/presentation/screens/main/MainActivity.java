@@ -1,6 +1,12 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.main;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.MainActivityBinding;

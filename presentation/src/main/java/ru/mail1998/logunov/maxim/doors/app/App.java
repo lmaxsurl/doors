@@ -21,7 +21,6 @@ public class App extends Application {
         super.onCreate();
         appComponent = DaggerAppComponent
                 .builder()
-                .appModule(new AppModule(this))
                 .build();
         if(LeakCanary.isInAnalyzerProcess(this)){
             return;

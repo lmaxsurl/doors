@@ -29,8 +29,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public static DoorRepository provideDoorRepository(Context context){
-        return new DoorRepositoryImpl(new RestService(), context);
+    public static DoorRepository provideDoorRepository(){
+        return new DoorRepositoryImpl(new RestService());
     }
 
     @Provides

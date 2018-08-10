@@ -1,5 +1,7 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.type_list;
 
+import android.widget.ArrayAdapter;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +10,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import logunov.maxim.domain.entity.Type;
 import logunov.maxim.domain.usecases.GetListTypeUseCase;
+import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.app.App;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
@@ -25,7 +28,6 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
         App.getAppComponent().runInject(this);
     }
 
-
     public TypesListViewModel() {
         showProgressBar();
         adapter.observeItemClick()
@@ -37,7 +39,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
 
                     @Override
                     public void onNext(ClickedItemModel clickedItemModel) {
-                        if(clickedItemModel.getEntity() instanceof Type){
+                        if (clickedItemModel.getEntity() instanceof Type) {
                             router.goToDoorList(doorClass,
                                     ((Type) clickedItemModel.getEntity()).getType());
                         }
@@ -45,7 +47,8 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
 
                     @Override
                     public void onError(Throwable e) {
-                        //FIXME show error
+                        router.showError(e);
+                        router.finishActivity();
                     }
 
                     @Override
@@ -56,33 +59,40 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
     }
 
     private void getData() {
-        getListTypeUseCase
-                .getTypes(doorClass)
-                .subscribe(new Observer<List<Type>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        getCompositeDisposable().add(d);
-                    }
+        if (isConnected.get())
+            getListTypeUseCase
+                    .getTypes(doorClass)
+                    .subscribe(new Observer<List<Type>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            getCompositeDisposable().add(d);
+                        }
 
-                    @Override
-                    public void onNext(List<Type> types) {
-                        adapter.setItems(types);
-                    }
+                        @Override
+                        public void onNext(List<Type> types) {
+                            adapter.setItems(types);
+                            dismissProgressBar();
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                    }
-                });
+                        }
+                    });
     }
 
     public void setDoorClass(String doorClass) {
         this.doorClass = doorClass;
+        getData();
+    }
+
+    public void tryAgain() {
+        setIsConnected(router.checkInternetAccess());
         getData();
     }
 }

@@ -2,25 +2,14 @@ package logunov.maxim.domain.entity;
 
 public class Door implements DomainModel {
 
-    private int descriptionId;
+    private String description;
     private String title;
     private String doorUrl;
-    private String glazedDoorUrl;
 
-    public Door(String title, int description, String doorUrl, String glazedDoorUrl) {
-        this.descriptionId = description;
+    public Door(String title, String description, String doorUrl) {
+        this.description = description;
         this.title = title;
         this.doorUrl = doorUrl;
-        this.glazedDoorUrl = glazedDoorUrl;
-    }
-
-
-    public String getGlazedDoorUrl() {
-        return glazedDoorUrl;
-    }
-
-    public void setGlazedDoorUrl(String glazedDoorUrl) {
-        this.glazedDoorUrl = glazedDoorUrl;
     }
 
     public String getDoorUrl() {
@@ -39,11 +28,11 @@ public class Door implements DomainModel {
         this.title = title;
     }
 
-    public int getDescriptionId() {
-        return descriptionId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptionId(int descriptionId) {
-        this.descriptionId = descriptionId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

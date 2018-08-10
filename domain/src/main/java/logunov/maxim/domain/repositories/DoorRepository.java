@@ -13,10 +13,6 @@ public interface DoorRepository {
 
     Observable<Door> getDoor(String doorClass, String id);
 
-    Observable<List<Description>> getDescriptions();
-
-    Observable<Description> getDescription(int id);
-
     Observable<List<Type>> getDoorTypes(String doorClass);
 
 }

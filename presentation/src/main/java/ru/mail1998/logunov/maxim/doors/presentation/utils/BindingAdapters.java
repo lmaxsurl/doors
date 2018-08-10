@@ -18,9 +18,6 @@ public class BindingAdapters {
     public static void loadImage(ImageView view, String url) {
         Picasso.get()
                 .load(url)
-                .resize(512, 512)
-                .centerCrop()
-                .transform(new CropCircleTransformation())
                 .into(view);
     }
 

@@ -10,14 +10,11 @@ public class DoorResponse {
     @SerializedName("door_url")
     private String doorUrl;
 
-    @SerializedName("glazed_door_url")
-    private String glazedDoorUrl;
-
     @SerializedName("type")
     private String type;
 
-    @SerializedName("des_id")
-    private int descriptionId;
+    @SerializedName("description")
+    private String description;
 
     public String getTitle() {
         return title;
@@ -27,15 +24,12 @@ public class DoorResponse {
         return doorUrl;
     }
 
-    public String getGlazedDoorUrl() {
-        return glazedDoorUrl;
-    }
-
     public String getType() {
         return type;
     }
 
-    public int getDescriptionId() {
-        return descriptionId;
+    public String getDescription() {
+        return description;
     }
+
 }

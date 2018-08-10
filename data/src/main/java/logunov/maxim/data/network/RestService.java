@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import logunov.maxim.data.entity.DescriptionResponse;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.HttpError;
 import logunov.maxim.data.entity.TypeResponse;
@@ -28,9 +27,10 @@ public class RestService {
     private Gson gson;
     private ErrorParserTransformer errorParserTransformer;
     private static final String REQUEST_URL =
-            "https://api.backendless.com/1EBA3425-DB44-22DD-FFF0-1F00CF757E00/16478945-A0BC-408D-FF5E-C4D6CA9F4800";
+            "https://api.backendless.com/1EBA3425-DB44-22DD-FFF0-1F00CF757E00/16478945-A0BC-408D-FF5E-C4D6CA9F4800/";
     private static final String STRING_TYPE_FORMAT = "type LIKE '%s'";
     private static final String STRING_ID_FORMAT = "id LIKE %d";
+    private static final int CONNECTION_TIME = 15;
     private static final String TYPE = "type";
 
 
@@ -42,8 +42,8 @@ public class RestService {
 
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(CONNECTION_TIME, TimeUnit.SECONDS)
+                .connectTimeout(CONNECTION_TIME, TimeUnit.SECONDS)
                 .addInterceptor(logging)
                 .build();
 
@@ -72,18 +72,6 @@ public class RestService {
         return restApi
                 .getDoorTypes(doorClass, TYPE)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
-    }
-
-    public Observable<List<DescriptionResponse>> getDescriptions(){
-        return restApi
-                .getDescriptions()
-                .compose(errorParserTransformer.<List<DescriptionResponse>, Throwable>parseHttpError());
-    }
-
-    public Observable<DescriptionResponse> getDescription(int id){
-        return restApi
-                .getDescription(String.format(STRING_ID_FORMAT, id))
-                .compose(errorParserTransformer.<DescriptionResponse, Throwable>parseHttpError());
     }
 
     public Observable<DoorResponse> getDoor(String doorClass, String id){

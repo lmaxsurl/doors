@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.mail1998.logunov.maxim.doors">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -10,14 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".presentation.screens.main.MainActivity">
+        <activity
+            android:name=".presentation.screens.main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.screens.type_list.TypesListActivity"/>
-
-
+        <activity
+            android:name=".presentation.screens.type_list.TypesListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.screens.door_list.DoorListActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

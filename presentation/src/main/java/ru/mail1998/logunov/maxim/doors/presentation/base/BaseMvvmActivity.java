@@ -1,7 +1,12 @@
 package ru.mail1998.logunov.maxim.doors.presentation.base;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -43,6 +48,7 @@ public abstract class BaseMvvmActivity<
     protected void onStart() {
         super.onStart();
         viewModel.addRouter(router);
+        viewModel.setIsConnected(router.checkInternetAccess());
     }
 
     @Override
