@@ -23,35 +23,27 @@ public abstract class BaseRouter<A extends BaseActivity> {
         activity.finish();
     }
 
-    public void showError(Throwable throwable) {
+    public String getErrorMessage(Throwable throwable) {
         if (throwable instanceof Error) {
             Error error = (Error) throwable;
             switch (error.getType()) {
                 case INTERNET_IS_NOT_AVAILABLE:
-                    showToastError(R.string.error_internet_not_available);
-                    break;
+                    return activity.getResources().getString(R.string.error_internet_not_available);
                 case SERVER_IS_NOT_AVAILABLE:
-                    showToastError(R.string.error_server_not_available);
-                    break;
+                    return activity.getResources().getString(R.string.error_server_not_available);
                 case SERVER_ERROR:
-                    showToastError(R.string.error_server);
-                    break;
+                    return activity.getResources().getString(R.string.error_server);
                 default: {
                     Log.e(activity.getClass().getSimpleName(),
                             "забыл указать тип ошибки " + throwable.toString());
-                    showToastError(R.string.error);
+                    return activity.getResources().getString(R.string.something_wrong);
                 }
             }
         } else {
             Log.e(activity.getClass().getSimpleName(),
                     "ужасная проблема " + throwable.toString());
-            showToastError(R.string.error);
+            return activity.getResources().getString(R.string.error);
         }
-    }
-
-    private void showToastError(int messageErrorId) {
-        Toast.makeText(activity, messageErrorId, Toast.LENGTH_SHORT)
-                .show();
     }
 
     public boolean checkInternetAccess() {

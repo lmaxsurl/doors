@@ -2,8 +2,12 @@ package ru.mail1998.logunov.maxim.doors.presentation.base;
 
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
+import android.util.Log;
 
 import io.reactivex.disposables.CompositeDisposable;
+import logunov.maxim.domain.entity.Error;
+import ru.mail1998.logunov.maxim.doors.R;
 
 public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
 
@@ -16,6 +20,8 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
     public ObservableBoolean progressBar = new ObservableBoolean(true);
 
     public ObservableBoolean isConnected = new ObservableBoolean(true);
+
+    public ObservableField<String> errorMessage = new ObservableField<>("");
 
     public void setIsConnected(Boolean isConnected) {
         this.isConnected.set(isConnected);
@@ -40,6 +46,8 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
     public void removeRouter() {
         router = null;
     }
+
+
 
     public CompositeDisposable getCompositeDisposable() {
         if (compositeDisposable == null) {

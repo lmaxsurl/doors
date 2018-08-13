@@ -1,23 +1,16 @@
 package logunov.maxim.data.repositories;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.TypeResponse;
 import logunov.maxim.data.network.RestService;
 import logunov.maxim.domain.entity.Door;
-import logunov.maxim.domain.entity.Error;
-import logunov.maxim.domain.entity.ErrorType;
 import logunov.maxim.domain.entity.Type;
 import logunov.maxim.domain.repositories.DoorRepository;
 
@@ -79,7 +72,8 @@ public class DoorRepositoryImpl implements DoorRepository {
     private Door mapDoor(DoorResponse doorResponse) {
         return new Door(doorResponse.getTitle(),
                 doorResponse.getDescription(),
-                doorResponse.getDoorUrl());
+                doorResponse.getDoorUrl(),
+                doorResponse.getHighQualityDoorUrl());
     }
 
     private Type mapType(TypeResponse typeResponse) {

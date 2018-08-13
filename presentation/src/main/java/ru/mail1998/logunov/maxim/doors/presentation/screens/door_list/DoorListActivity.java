@@ -5,11 +5,14 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityDoorListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
+import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
 import ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListActivity;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListActivity.EXTRA_DOOR_CLASS;
@@ -27,7 +30,6 @@ public class DoorListActivity extends BaseMvvmActivity<
         intent.putExtra(EXTRA_DOOR_TYPE, doorType);
         return intent;
     }
-
 
     @Override
     protected DoorListViewModel provideViewModel() {
@@ -47,10 +49,33 @@ public class DoorListActivity extends BaseMvvmActivity<
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
-                getIntent().getStringExtra(EXTRA_DOOR_TYPE));
+        initRecyclerView();
+        initActionBar();
+    }
+
+    private void initActionBar() {
+        setSupportActionBar(binding.toolBar);
+    }
+
+    private void initRecyclerView() {
         binding.doorListRv.setLayoutManager(new LinearLayoutManager(this));
         binding.doorListRv.setAdapter(viewModel.adapter);
         binding.doorListRv.setHasFixedSize(true);
+        binding.doorListRv.addItemDecoration(new SimpleDividerItemDecoration(this));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
+                getIntent().getStringExtra(EXTRA_DOOR_TYPE));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(viewModel.showDoor.get())
+            viewModel.hideImage();
+        else
+            super.onBackPressed();
     }
 }

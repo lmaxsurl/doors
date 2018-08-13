@@ -30,6 +30,8 @@ public class RestService {
             "https://api.backendless.com/1EBA3425-DB44-22DD-FFF0-1F00CF757E00/16478945-A0BC-408D-FF5E-C4D6CA9F4800/";
     private static final String STRING_TYPE_FORMAT = "type LIKE '%s'";
     private static final String STRING_ID_FORMAT = "id LIKE %d";
+    private static final String DOORS_SORT_BY = "title asc";
+    private static final String TYPES_SORT_BY = "type asc";
     private static final int CONNECTION_TIME = 15;
     private static final String TYPE = "type";
 
@@ -64,13 +66,13 @@ public class RestService {
 
     public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType){
         return restApi
-                .getDoors(doorClass, String.format(STRING_TYPE_FORMAT, doorType))
+                .getDoors(doorClass, String.format(STRING_TYPE_FORMAT, doorType), DOORS_SORT_BY)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
     public Observable<List<TypeResponse>> getTypes(String doorClass){
         return restApi
-                .getDoorTypes(doorClass, TYPE)
+                .getDoorTypes(doorClass, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 

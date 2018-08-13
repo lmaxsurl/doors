@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,19 +10,34 @@
             type="ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
-        style="@style/AppConstraintLayout">
+    <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/tool_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                style="@style/AppToolBar"
+                app:titleTextColor="@android:color/white"
+                app:layout_scrollFlags="scroll|snap"/>
+
+        </android.support.design.widget.AppBarLayout>
 
         <ImageView
             style="@style/NoInternetIcon"
+            android:layout_marginBottom="@dimen/app_margin"
             android:visibility="@{!viewModel.isConnected}"
-            app:layout_constraintBottom_toTopOf="@id/message_tv"
+            app:layout_constraintBottom_toTopOf="@+id/message_tv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/sad_face" />
 
         <TextView
             android:id="@+id/message_tv"
-            style="@style/NoInternetText"
+            style="@style/ShowErrorEditText"
+            android:text="@{viewModel.errorMessage}"
             android:visibility="@{!viewModel.isConnected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -30,11 +46,12 @@
 
         <Button
             style="@style/NoInternetButton"
+            android:background="@drawable/button_selector"
             android:onClick="@{() -> viewModel.tryAgain()}"
             android:visibility="@{!viewModel.isConnected}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/message_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/message_tv" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -51,8 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="@{!viewModel.progressBar &amp;&amp; viewModel.isConnected}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar_container" />
 
     </android.support.constraint.ConstraintLayout>
 

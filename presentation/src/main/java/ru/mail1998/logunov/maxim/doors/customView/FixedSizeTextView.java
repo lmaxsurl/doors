@@ -32,7 +32,7 @@ public class FixedSizeTextView extends android.support.v7.widget.AppCompatTextVi
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
-        height = width * 0.15f;
+        height = width * 0.175f;
         setMeasuredDimension(widthMeasureSpec, (int) height);
     }
 

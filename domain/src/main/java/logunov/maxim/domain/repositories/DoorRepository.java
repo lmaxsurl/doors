@@ -3,7 +3,6 @@ package logunov.maxim.domain.repositories;
 import java.util.List;
 
 import io.reactivex.Observable;
-import logunov.maxim.domain.entity.Description;
 import logunov.maxim.domain.entity.Door;
 import logunov.maxim.domain.entity.Type;
 

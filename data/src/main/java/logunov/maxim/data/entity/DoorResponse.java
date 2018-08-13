@@ -10,6 +10,9 @@ public class DoorResponse {
     @SerializedName("door_url")
     private String doorUrl;
 
+    @SerializedName("hq_door_url")
+    private String highQualityDoorUrl;
+
     @SerializedName("type")
     private String type;
 
@@ -32,4 +35,7 @@ public class DoorResponse {
         return description;
     }
 
+    public String getHighQualityDoorUrl() {
+        return highQualityDoorUrl;
+    }
 }

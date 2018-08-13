@@ -8,10 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityTypesListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
+import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
 
 public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
         ActivityTypesListBinding,
@@ -43,14 +45,24 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
         initRecycleView();
+        initToolBar();
+    }
+
+    private void initToolBar() {
+        setSupportActionBar(binding.toolBar);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
     }
 
     private void initRecycleView() {
         binding.typesListRv.setLayoutManager(new LinearLayoutManager(this));
         binding.typesListRv.setAdapter(viewModel.adapter);
         binding.typesListRv.setHasFixedSize(true);
-        binding.typesListRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        binding.typesListRv.addItemDecoration(new SimpleDividerItemDecoration(this));
     }
 }

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,16 +11,20 @@
     <style name="MainScreenTextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/item_selector</item>
+        <item name="android:paddingStart">@dimen/app_padding</item>
+        <item name="android:paddingEnd">@dimen/app_padding</item>
         <item name="android:gravity">center|start</item>
         <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:visibility">gone</item>
-        <item name="android:layout_marginTop">@dimen/divider_margin</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
     </style>
 
     <style name="NoInternetIcon">
@@ -30,18 +34,20 @@
         <item name="android:contentDescription">@string/sad_face</item>
     </style>
 
-    <style name="NoInternetText">
+    <style name="ShowErrorEditText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size</item>
-        <item name="android:textColor">@color/TextColor</item>
-        <item name="android:text">@string/no_internet_connection</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <style name="NoInternetButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/button_selector</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:text">@string/try_again</item>
     </style>
 
@@ -49,8 +55,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:animateLayoutChanges">true</item>
-        <item name="android:padding">@dimen/app_padding</item>
-        <item name="android:background">@color/BackgroundColor</item>
+        <item name="android:background">@color/backgroundColor</item>
+    </style>
+    
+    <style name="AppToolBar" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

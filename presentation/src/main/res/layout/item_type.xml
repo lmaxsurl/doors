@@ -8,25 +8,16 @@
             type="ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypeItemViewModel" />
     </data>
 
-    <FrameLayout
+    <ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
-
-        <ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:gravity="center|start"
-            android:textColor="@android:color/black"
-            android:text="@{viewModel.type}">
-        </ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView>
-
-        <View
-            style="@style/Divider"
-            android:background="@android:color/darker_gray"
-            android:layout_gravity="bottom"/>
-    </FrameLayout>
+        android:background="@drawable/item_selector"
+        android:gravity="center|start"
+        android:paddingStart="@dimen/app_padding"
+        android:paddingEnd="@dimen/app_padding"
+        android:text="@{viewModel.type}"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size" />
 
 </layout>
 

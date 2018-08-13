@@ -1,14 +1,17 @@
 <resources>
-    <string name="app_name">Doors</string>
+    <string name="app_name">Каталог дверей</string>
     <string name="wood_door">Межкомнатные двери</string>
     <string name="metal_door">Входные двери</string>
     <string name="we_on_map">Мы на карте</string>
     <string name="about_us">О нас</string>
     <string name="error_internet_not_available">Internet is not available</string>
-    <string name="error_server_not_available">Server is not available</string>
-    <string name="error_server">Server error</string>
+    <string name="error_server_not_available">Server is not available\nCheck internet connection</string>
+    <string name="error_server">Server error\nPlease, try again later</string>
     <string name="error">Unexpected error</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="something_wrong">Something went wrong…\nPlease, try again later</string>
     <string name="try_again">Try again</string>
     <string name="sad_face">Sad face</string>
+    <string name="door_image">Door image</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

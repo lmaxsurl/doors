@@ -1,6 +1,7 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.main;
 
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseRouter;
+import ru.mail1998.logunov.maxim.doors.presentation.screens.map.MapsActivity;
 import ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListActivity;
 
 public class MainActivityRouter extends BaseRouter<MainActivity> {
@@ -9,7 +10,11 @@ public class MainActivityRouter extends BaseRouter<MainActivity> {
         super(activity);
     }
 
-    public void showDoorTypes(String doorType){
-        activity.startActivity(TypesListActivity.getIntent(activity, doorType));
+    public void showDoorTypes(String doorClass){
+        activity.startActivity(TypesListActivity.getIntent(activity, doorClass));
+    }
+
+    public void openMap(){
+        activity.startActivity(MapsActivity.getIntent(activity));
     }
 }
