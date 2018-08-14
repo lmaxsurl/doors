@@ -49,7 +49,6 @@ public abstract class BaseMvvmActivity<
     protected void onStart() {
         super.onStart();
         viewModel.addRouter(router);
-        viewModel.setIsConnected(router.checkInternetAccess());
     }
 
     @Override

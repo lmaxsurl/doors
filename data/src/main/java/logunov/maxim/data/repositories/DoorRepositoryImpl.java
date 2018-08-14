@@ -40,18 +40,6 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<Door> getDoor(String doorClass, String id) {
-        return restService
-                .getDoor(doorClass, id)
-                .map(new Function<DoorResponse, Door>() {
-                    @Override
-                    public Door apply(DoorResponse doorResponse) throws Exception {
-                        return mapDoor(doorResponse);
-                    }
-                });
-    }
-
-    @Override
     public Observable<List<Type>> getDoorTypes(String doorClass) {
         return restService
                 .getTypes(doorClass)

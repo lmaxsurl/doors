@@ -1,4 +1,4 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.door_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
@@ -45,7 +45,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     public void setDoorsParams(String doorsClass, String doorsType) {
         this.doorsClass = doorsClass;
         this.doorsType = doorsType;
-        isConnected.set(router.checkInternetAccess());
+        //isConnected.set(router.checkInternetAccess());
         if (doorsClass.equals(Extras.METAL_DOOR_CLASS))
             adapter.observeItemClick()
                     .subscribe(new Observer<ClickedItemModel>() {
@@ -85,6 +85,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
                     public void onNext(List<Door> doors) {
                         adapter.setItems(doors);
                         dismissProgressBar();
+                        isConnected.set(true);
                     }
 
                     @Override
@@ -100,7 +101,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     }
 
     public void onTryAgainClick() {
-        isConnected.set(router.checkInternetAccess());
+       // isConnected.set(router.checkInternetAccess());
         getData();
     }
 

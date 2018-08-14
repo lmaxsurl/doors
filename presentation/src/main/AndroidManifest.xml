@@ -29,10 +29,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.screens.type_list.TypesListActivity"
+            android:name=".presentation.screens.type.TypesListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.screens.door_list.DoorListActivity"
+            android:name=".presentation.screens.door.DoorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.screens.info.InfoActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -48,7 +51,7 @@
 
         <activity
             android:name=".presentation.screens.map.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     <color name="colorAccent">#909090</color>
 
     <color name="backgroundColor">#FFFFFF</color>
-    <color name="textColor">#111111</color>
+    <color name="textColor">#000000</color>
     <color name="colorItemPressed">#eeeeee</color>
     <color name="colorItemFocused">#f5f5f5</color>
     <color name="shadowColor">#9a000000</color>

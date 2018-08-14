@@ -1,4 +1,4 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.type_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.type;
 
 import java.util.List;
 
@@ -68,6 +68,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
                     public void onNext(List<Type> types) {
                         adapter.setItems(types);
                         dismissProgressBar();
+                        isConnected.set(true);
                     }
 
                     @Override
@@ -89,7 +90,6 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
     }
 
     public void tryAgain() {
-        isConnected.set(router.checkInternetAccess());
         getData();
     }
 }

@@ -10,8 +10,6 @@ public interface DoorRepository {
 
     Observable<List<Door>> getAll(String doorClass, String doorType);
 
-    Observable<Door> getDoor(String doorClass, String id);
-
     Observable<List<Type>> getDoorTypes(String doorClass);
 
 }

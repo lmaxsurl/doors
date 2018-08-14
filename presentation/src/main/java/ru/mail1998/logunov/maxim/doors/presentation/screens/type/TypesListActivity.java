@@ -1,14 +1,11 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.type_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.type;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityTypesListBinding;

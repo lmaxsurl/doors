@@ -1,4 +1,4 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.type_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.type;
 
 import android.databinding.ObservableField;
 

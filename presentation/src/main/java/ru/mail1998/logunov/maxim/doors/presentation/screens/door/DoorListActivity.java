@@ -1,21 +1,18 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.door_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityDoorListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
-import ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListActivity;
 
-import static ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypesListActivity.EXTRA_DOOR_CLASS;
+import static ru.mail1998.logunov.maxim.doors.presentation.screens.type.TypesListActivity.EXTRA_DOOR_CLASS;
 
 public class DoorListActivity extends BaseMvvmActivity<
         DoorListViewModel,

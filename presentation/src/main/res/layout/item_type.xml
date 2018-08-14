@@ -5,10 +5,10 @@
 
         <variable
             name="viewModel"
-            type="ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypeItemViewModel" />
+            type="ru.mail1998.logunov.maxim.doors.presentation.screens.type.TypeItemViewModel" />
     </data>
 
-    <ru.mail1998.logunov.maxim.doors.customView.FixedSizeTextView
+    <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_selector"

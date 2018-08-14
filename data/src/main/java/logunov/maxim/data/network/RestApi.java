@@ -16,10 +16,6 @@ public interface RestApi {
                                             @Query("where") String type,
                                             @Query("sortBy") String sort);
 
-    @GET("data/{class}/{id}")
-    Observable<DoorResponse> getDoor(@Path("class") String doorClass,
-                                     @Path("id") String id);
-
     @GET("data/{class}")
     Observable<List<TypeResponse>> getDoorTypes(@Path("class") String doorClass,
                                                 @Query("props") String type,

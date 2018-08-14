@@ -1,14 +1,11 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.door_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import logunov.maxim.domain.entity.Door;
 import ru.mail1998.logunov.maxim.doors.databinding.ItemDoorBinding;
-import ru.mail1998.logunov.maxim.doors.databinding.ItemTypeBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.BaseItemViewHolder;
-import ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypeItemViewHolder;
-import ru.mail1998.logunov.maxim.doors.presentation.screens.type_list.TypeItemViewModel;
 
 public class DoorItemViewHolder extends BaseItemViewHolder <Door, DoorItemViewModel, ItemDoorBinding> {
 

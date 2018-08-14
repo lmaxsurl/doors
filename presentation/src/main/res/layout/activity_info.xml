@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.mail1998.logunov.maxim.doors.presentation.screens.info.InfoViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/tool_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                style="@style/AppToolBar"
+                app:titleTextColor="@android:color/white"/>
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/InfoTextView"
+            android:text="@string/shop_address"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar_container" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/InfoTextView"
+            android:text="@string/working_hours"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/InfoTextView"
+            android:text="@string/open_hours"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/InfoTextView"
+            android:text="@string/day_off"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/InfoTextView"
+            android:text="@string/phone"
+            app:layout_constraintTop_toBottomOf="@id/textView6" />
+
+        <TextView
+            style="@style/InfoClickTextView"
+            android:onClick="@{() -> viewModel.onMtsNumberClick()}"
+            android:text="@string/mts_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/InfoClickTextView"
+            android:onClick="@{() -> viewModel.onVelcomNumberClick()}"
+            android:text="@string/velcom_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            style="@style/InfoClickTextView"
+            android:onClick="@{() -> viewModel.onLinkClick()}"
+            android:text="@string/icons8"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

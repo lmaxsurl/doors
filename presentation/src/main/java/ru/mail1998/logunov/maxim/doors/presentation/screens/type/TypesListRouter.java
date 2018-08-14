@@ -1,9 +1,7 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.type_list;
-
-import android.content.Intent;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.type;
 
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseRouter;
-import ru.mail1998.logunov.maxim.doors.presentation.screens.door_list.DoorListActivity;
+import ru.mail1998.logunov.maxim.doors.presentation.screens.door.DoorListActivity;
 
 public class TypesListRouter extends BaseRouter<TypesListActivity> {
 

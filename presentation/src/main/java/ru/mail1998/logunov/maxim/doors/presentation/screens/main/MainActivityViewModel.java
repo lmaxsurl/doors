@@ -31,7 +31,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     }
 
     public void onMetalDoorClick(){
-        router.showDoorTypes(Extras.METAL_DOOR_CLASS);
+        router.showMetalDoors();
     }
 
     public void onMapClick(){
@@ -39,6 +39,6 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     }
 
     public void onInfoClick() {
-
+        router.showInfo();
     }
 }

@@ -19,10 +19,6 @@ public abstract class BaseRouter<A extends BaseActivity> {
         this.activity = activity;
     }
 
-    public void finishActivity() {
-        activity.finish();
-    }
-
     public String getErrorMessage(Throwable throwable) {
         if (throwable instanceof Error) {
             Error error = (Error) throwable;
@@ -45,14 +41,4 @@ public abstract class BaseRouter<A extends BaseActivity> {
             return activity.getResources().getString(R.string.error);
         }
     }
-
-    public boolean checkInternetAccess() {
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        return connectivityManager != null &&
-                connectivityManager.getActiveNetworkInfo() != null &&
-                connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
-    }
-
 }

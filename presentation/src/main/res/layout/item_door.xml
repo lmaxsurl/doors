@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.mail1998.logunov.maxim.doors.presentation.screens.door_list.DoorItemViewModel"/>
+            type="ru.mail1998.logunov.maxim.doors.presentation.screens.door.DoorItemViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{viewModel.description}"
-            android:textSize="17sp"
+            android:textSize="@dimen/smallTextSize"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />

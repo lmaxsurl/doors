@@ -28,8 +28,7 @@ public class RestService {
     private ErrorParserTransformer errorParserTransformer;
     private static final String REQUEST_URL =
             "https://api.backendless.com/1EBA3425-DB44-22DD-FFF0-1F00CF757E00/16478945-A0BC-408D-FF5E-C4D6CA9F4800/";
-    private static final String STRING_TYPE_FORMAT = "type LIKE '%s'";
-    private static final String STRING_ID_FORMAT = "id LIKE %d";
+    private static final String STRING_TYPE_FORMAT = "type LIKE '%";
     private static final String DOORS_SORT_BY = "title asc";
     private static final String TYPES_SORT_BY = "type asc";
     private static final int CONNECTION_TIME = 15;
@@ -66,7 +65,7 @@ public class RestService {
 
     public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType){
         return restApi
-                .getDoors(doorClass, String.format(STRING_TYPE_FORMAT, doorType), DOORS_SORT_BY)
+                .getDoors(doorClass, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
@@ -74,12 +73,6 @@ public class RestService {
         return restApi
                 .getDoorTypes(doorClass, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
-    }
-
-    public Observable<DoorResponse> getDoor(String doorClass, String id){
-        return restApi
-                .getDoor(doorClass, id)
-                .compose(errorParserTransformer.<DoorResponse, HttpError>parseHttpError());
     }
 
 }

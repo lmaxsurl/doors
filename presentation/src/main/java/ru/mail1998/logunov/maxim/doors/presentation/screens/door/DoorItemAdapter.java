@@ -1,4 +1,4 @@
-package ru.mail1998.logunov.maxim.doors.presentation.screens.door_list;
+package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;

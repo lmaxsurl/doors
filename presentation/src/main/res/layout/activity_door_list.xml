@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="ru.mail1998.logunov.maxim.doors.presentation.screens.door_list.DoorListViewModel" />
+            type="ru.mail1998.logunov.maxim.doors.presentation.screens.door.DoorListViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
@@ -14,13 +14,11 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/tool_bar_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tool_bar"
                 style="@style/AppToolBar"
-                app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextColor="@android:color/white">
 
             </android.support.v7.widget.Toolbar>
@@ -37,7 +35,7 @@
 
         <TextView
             android:id="@+id/message_tv"
-            style="@style/ShowErrorEditText"
+            style="@style/ErrorEditText"
             android:text="@{viewModel.errorMessage}"
             android:visibility="@{!viewModel.isConnected}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +66,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="@{!viewModel.progressBar &amp;&amp; viewModel.isConnected}"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tool_bar_container" />
 
@@ -79,10 +76,11 @@
             android:onClick="@{() -> viewModel.hideImage()}"
             android:visibility="@{viewModel.showDoor}" />
 
-        <FrameLayout
-            android:layout_width="260dp"
-            android:layout_height="270dp"
+        <ru.mail1998.logunov.maxim.doors.custom.FixedSizeFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/item_selector"
+            android:layout_margin="40dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> viewModel.hideImage()}"
@@ -104,7 +102,7 @@
                 android:layout_margin="@dimen/app_margin"
                 android:contentDescription="@string/door_image"
                 app:imageUrl="@{viewModel.doorUrl}" />
-        </FrameLayout>
+        </ru.mail1998.logunov.maxim.doors.custom.FixedSizeFrameLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

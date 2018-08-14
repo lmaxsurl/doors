@@ -23,10 +23,6 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
 
     public ObservableField<String> errorMessage = new ObservableField<>("");
 
-    public void setIsConnected(Boolean isConnected) {
-        this.isConnected.set(isConnected);
-    }
-
     public void showProgressBar() {
         progressBar.set(true);
     }
@@ -47,23 +43,17 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
         router = null;
     }
 
-
-
     public CompositeDisposable getCompositeDisposable() {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
-
         return compositeDisposable;
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        if (compositeDisposable != null
-                && !compositeDisposable.isDisposed()) {
-            compositeDisposable.dispose();
-        }
+        if (compositeDisposable != null)
+            compositeDisposable.clear();
     }
-
 }
