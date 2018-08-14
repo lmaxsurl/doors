@@ -13,6 +13,7 @@ public class InfoViewModel extends BaseViewModel<InfoRouter> {
         App.getAppComponent().runInject(this);
     }
 
+
     public void onMtsNumberClick(){
         router.openDial(MTS_NUMBER);
     }
@@ -22,7 +23,7 @@ public class InfoViewModel extends BaseViewModel<InfoRouter> {
     }
 
     public void onLinkClick(){
-        router.openBrowser(ICONS8_URL);
+        router.openWebsite(ICONS8_URL);
     }
 
 }

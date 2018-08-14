@@ -3,6 +3,8 @@ package ru.mail1998.logunov.maxim.doors.presentation.screens.info;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityInfoBinding;
@@ -28,5 +30,11 @@ public class InfoActivity extends BaseMvvmActivity<InfoViewModel, ActivityInfoBi
     @Override
     protected InfoRouter provideRouter() {
         return new InfoRouter(this);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setSupportActionBar(binding.toolBar);
     }
 }

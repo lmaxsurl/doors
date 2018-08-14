@@ -24,7 +24,7 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<List<Door>> getAll(String doorClass, String doorType) {
+    public Observable<List<Door>> getDoors(String doorClass, String doorType) {
         return restService
                 .getAllDoors(doorClass, doorType)
                 .map(new Function<List<DoorResponse>, List<Door>>() {
@@ -57,6 +57,7 @@ public class DoorRepositoryImpl implements DoorRepository {
                 });
     }
 
+    // transform DoorResponse to Door
     private Door mapDoor(DoorResponse doorResponse) {
         return new Door(doorResponse.getTitle(),
                 doorResponse.getDescription(),
@@ -64,6 +65,7 @@ public class DoorRepositoryImpl implements DoorRepository {
                 doorResponse.getHighQualityDoorUrl());
     }
 
+    // transform TypeResponse to Type
     private Type mapType(TypeResponse typeResponse) {
         return new Type(typeResponse.getType());
     }

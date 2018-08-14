@@ -13,8 +13,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ru.mail1998.logunov.maxim.doors.R;
+import ru.mail1998.logunov.maxim.doors.presentation.base.BaseActivity;
+import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private final double latitude = 54.884390;

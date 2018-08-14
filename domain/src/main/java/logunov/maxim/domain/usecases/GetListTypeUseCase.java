@@ -21,6 +21,7 @@ public class GetListTypeUseCase extends BaseUseCase {
         this.doorRepository = doorRepository;
     }
 
+    //return result of server request
     public Observable<List<Type>> getTypes(String doorClass) {
         return doorRepository
                 .getDoorTypes(doorClass)

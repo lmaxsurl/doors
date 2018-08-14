@@ -12,17 +12,10 @@
 
     <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/tool_bar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tool_bar"
-                style="@style/AppToolBar"
-                app:titleTextColor="@android:color/white"
-                app:layout_scrollFlags="scroll|snap"/>
-        </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            style="@style/AppToolBar"
+            app:titleTextColor="@android:color/white"/>
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/wood_doors"
@@ -30,7 +23,7 @@
             android:drawableStart="@drawable/wood_door"
             android:onClick="@{() -> viewModel.onWoodDoorClick()}"
             android:text="@string/wood_door"
-            app:layout_constraintTop_toBottomOf="@+id/tool_bar_container" />
+            app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
         <View
             android:id="@+id/divider1"

@@ -8,7 +8,7 @@ import logunov.maxim.domain.entity.Type;
 
 public interface DoorRepository {
 
-    Observable<List<Door>> getAll(String doorClass, String doorType);
+    Observable<List<Door>> getDoors(String doorClass, String doorType);
 
     Observable<List<Type>> getDoorTypes(String doorClass);
 

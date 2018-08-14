@@ -1,9 +1,12 @@
 package logunov.maxim.data.network;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.net.ConnectException;
+import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
@@ -32,24 +35,17 @@ public class ErrorParserTransformer {
                 return upstream
                         .onErrorResumeNext(new Function<Throwable, ObservableSource<T>>() {
                             @Override
-                            public ObservableSource<T> apply(Throwable throwable) throws Exception {
+                            public ObservableSource<T> apply(Throwable throwable) {
 
                                 Error error;
                                 if (throwable instanceof HttpException) {
                                     HttpException httpException = (HttpException) throwable;
-                                    String errorBody = httpException.response().errorBody().toString();
-                                    E httpError = gson.fromJson(errorBody,
-                                            new TypeToken<E>() {
-                                            }.getType());
-                                    error = new Error(httpError.getMessage(),
+                                    error = new Error(httpException.getMessage(),
                                             ErrorType.SERVER_ERROR);
 
                                 } else if (throwable instanceof UnknownHostException) {
                                     error = new Error("Server is not available",
                                             ErrorType.SERVER_IS_NOT_AVAILABLE);
-                                } else if (throwable.getMessage().contains("404")) {
-                                    error = new Error("Url error 404",
-                                            ErrorType.SERVER_ERROR);
                                 } else if (throwable instanceof SocketTimeoutException
                                         || throwable instanceof ConnectException) {
                                     error = new Error("Internet is not available",

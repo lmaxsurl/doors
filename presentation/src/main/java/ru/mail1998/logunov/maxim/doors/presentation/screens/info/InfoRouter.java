@@ -14,15 +14,18 @@ public class InfoRouter extends BaseRouter<InfoActivity> {
         super(activity);
     }
 
-
+    // open dial with selected number
     public void openDial(String number) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
         activity.startActivity(intent);
+        startAnimation();
     }
 
-    public void openBrowser(String url){
+    // open website
+    public void openWebsite(String url){
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         activity.startActivity(intent);
+        startAnimation();
     }
 
 }

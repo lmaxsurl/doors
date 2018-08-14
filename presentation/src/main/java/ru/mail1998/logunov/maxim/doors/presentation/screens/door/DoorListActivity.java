@@ -11,15 +11,14 @@ import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityDoorListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
-
-import static ru.mail1998.logunov.maxim.doors.presentation.screens.type.TypesListActivity.EXTRA_DOOR_CLASS;
+import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_CLASS;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_TYPE;
 
 public class DoorListActivity extends BaseMvvmActivity<
         DoorListViewModel,
         ActivityDoorListBinding,
         DoorListRouter> {
-
-    private static final String EXTRA_DOOR_TYPE = "EXTRA_DOOR_TYPE";
 
     public static Intent getIntent(Activity activity, String doorClass, String doorType){
         Intent intent = new Intent(activity, DoorListActivity.class);
@@ -47,10 +46,6 @@ public class DoorListActivity extends BaseMvvmActivity<
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initRecyclerView();
-        initActionBar();
-    }
-
-    private void initActionBar() {
         setSupportActionBar(binding.toolBar);
     }
 
@@ -64,10 +59,12 @@ public class DoorListActivity extends BaseMvvmActivity<
     @Override
     protected void onStart() {
         super.onStart();
+        //send data to ViewModel
         viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
                 getIntent().getStringExtra(EXTRA_DOOR_TYPE));
     }
 
+    //check if door image is shown
     @Override
     public void onBackPressed() {
         if(viewModel.showDoor.get())

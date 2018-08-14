@@ -26,7 +26,9 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
     }
 
     public TypesListViewModel() {
+        // show progress bar until data will load
         showProgressBar();
+        // click processing on item in recycler view
         adapter.observeItemClick()
                 .subscribe(new Observer<ClickedItemModel>() {
                     @Override
@@ -55,6 +57,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
                 });
     }
 
+    // method that load data fom server
     private void getData() {
         getListTypeUseCase
                 .getTypes(doorClass)
@@ -84,12 +87,14 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
                 });
     }
 
+    // set door class for uploading data
     public void setDoorClass(String doorClass) {
         this.doorClass = doorClass;
         getData();
     }
 
-    public void tryAgain() {
+    // method that called when button 'try again' clicked
+    public void tryAgainClick() {
         getData();
     }
 }

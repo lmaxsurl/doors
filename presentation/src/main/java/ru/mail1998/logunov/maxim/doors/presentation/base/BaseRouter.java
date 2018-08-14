@@ -1,15 +1,9 @@
 package ru.mail1998.logunov.maxim.doors.presentation.base;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
-import android.widget.Toast;
 
 import logunov.maxim.domain.entity.Error;
 import ru.mail1998.logunov.maxim.doors.R;
-
-import static logunov.maxim.domain.entity.ErrorType.*;
 
 public abstract class BaseRouter<A extends BaseActivity> {
 
@@ -40,5 +34,9 @@ public abstract class BaseRouter<A extends BaseActivity> {
                     "ужасная проблема " + throwable.toString());
             return activity.getResources().getString(R.string.error);
         }
+    }
+
+    protected void startAnimation(){
+        activity.overridePendingTransition(R.anim.extension_with_alpha, R.anim.reduce_alfa);
     }
 }

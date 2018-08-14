@@ -16,6 +16,7 @@ public class TypeItemViewHolder extends BaseItemViewHolder<
         super(viewModel, binding);
     }
 
+    // inflate ViewHolder for RecyclerView
     public static TypeItemViewHolder create(ViewGroup parent, TypeItemViewModel viewModel) {
         ItemTypeBinding binding = ItemTypeBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false);

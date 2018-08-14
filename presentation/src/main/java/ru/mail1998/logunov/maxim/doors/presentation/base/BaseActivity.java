@@ -3,6 +3,7 @@ package ru.mail1998.logunov.maxim.doors.presentation.base;
 import android.support.v7.app.AppCompatActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
+import ru.mail1998.logunov.maxim.doors.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -23,4 +24,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             compositeDisposable.dispose();
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.increase_alfa, R.anim.compression_with_apha);
+    }
+
 }

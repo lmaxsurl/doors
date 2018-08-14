@@ -20,9 +20,10 @@ public class GetListDoorUserCase extends BaseUseCase {
         this.doorRepository = doorRepository;
     }
 
+    //return result of server request
     public Observable<List<Door>> getDoors(String doorClass, String doorType) {
         return doorRepository
-                .getAll(doorClass, doorType)
+                .getDoors(doorClass, doorType)
                 .subscribeOn(executionThread)
                 .observeOn(postExecutionThread);
     }

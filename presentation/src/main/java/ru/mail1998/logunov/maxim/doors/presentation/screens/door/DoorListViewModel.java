@@ -42,10 +42,12 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         showDoor.set(true);
     }
 
+    //set params for uploading data
     public void setDoorsParams(String doorsClass, String doorsType) {
         this.doorsClass = doorsClass;
         this.doorsType = doorsType;
-        //isConnected.set(router.checkInternetAccess());
+
+        //this code below working only with metal doors
         if (doorsClass.equals(Extras.METAL_DOOR_CLASS))
             adapter.observeItemClick()
                     .subscribe(new Observer<ClickedItemModel>() {
@@ -72,6 +74,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         getData();
     }
 
+    //method that upload data
     private void getData() {
         getListDoorUserCase
                 .getDoors(doorsClass, doorsType)
@@ -101,15 +104,16 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     }
 
     public void onTryAgainClick() {
-       // isConnected.set(router.checkInternetAccess());
         getData();
     }
 
+    // hide hight quality image after click
     public void hideImage() {
         showDoor.set(false);
         doorUrl.set(NULL_URL);
     }
 
+    //show error and hide other views
     private void showErrorMessage(Throwable throwable) {
         errorMessage.set(router.getErrorMessage(throwable));
         isConnected.set(false);

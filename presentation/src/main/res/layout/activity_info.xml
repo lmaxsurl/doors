@@ -12,25 +12,18 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
-        android:orientation="vertical">
+        android:background="@color/backgroundColor">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/tool_bar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tool_bar"
-                style="@style/AppToolBar"
-                app:titleTextColor="@android:color/white"/>
-        </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            style="@style/AppToolBar"
+            app:titleTextColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/textView3"
             style="@style/InfoTextView"
             android:text="@string/shop_address"
-            app:layout_constraintTop_toBottomOf="@+id/tool_bar_container" />
+            app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
         <TextView
             android:id="@+id/textView4"

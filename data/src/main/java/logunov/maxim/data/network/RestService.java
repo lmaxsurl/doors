@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
+import logunov.maxim.data.BuildConfig;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.HttpError;
 import logunov.maxim.data.entity.TypeResponse;
@@ -31,22 +32,23 @@ public class RestService {
     private static final String STRING_TYPE_FORMAT = "type LIKE '%";
     private static final String DOORS_SORT_BY = "title asc";
     private static final String TYPES_SORT_BY = "type asc";
-    private static final int CONNECTION_TIME = 15;
+    private static final int CONNECTION_TIME = 10;
     private static final String TYPE = "type";
 
 
     @Inject
     public RestService(){
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient
+        OkHttpClient.Builder okHttpBuilder = new OkHttpClient
                 .Builder()
                 .readTimeout(CONNECTION_TIME, TimeUnit.SECONDS)
-                .connectTimeout(CONNECTION_TIME, TimeUnit.SECONDS)
-                .addInterceptor(logging)
-                .build();
+                .connectTimeout(CONNECTION_TIME, TimeUnit.SECONDS);
+
+        // add logs when it's debug
+        if(BuildConfig.DEBUG){
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            okHttpBuilder.addInterceptor(logging);
+        }
 
         gson = new GsonBuilder()
                 .create();
@@ -56,7 +58,7 @@ public class RestService {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(REQUEST_URL)
-                .client(okHttpClient)
+                .client(okHttpBuilder.build())
                 .build()
                 .create(RestApi.class);
 
