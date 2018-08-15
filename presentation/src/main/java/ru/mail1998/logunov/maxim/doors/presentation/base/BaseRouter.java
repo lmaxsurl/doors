@@ -35,8 +35,4 @@ public abstract class BaseRouter<A extends BaseActivity> {
             return activity.getResources().getString(R.string.error);
         }
     }
-
-    protected void startAnimation(){
-        activity.overridePendingTransition(R.anim.extension_with_alpha, R.anim.reduce_alfa);
-    }
 }

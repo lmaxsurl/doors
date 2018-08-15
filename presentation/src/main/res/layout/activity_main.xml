@@ -15,7 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
             style="@style/AppToolBar"
-            app:titleTextColor="@android:color/white"/>
+            app:titleTextColor="@android:color/white" />
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/wood_doors"

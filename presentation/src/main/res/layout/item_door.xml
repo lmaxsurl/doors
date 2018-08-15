@@ -22,7 +22,8 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/door_image"
             android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.imageUrl}" />
+            app:imageUrl="@{viewModel.imageUrl}"
+            app:error="@{@drawable/error}"/>
 
         <TextView
             android:id="@+id/textView"
@@ -31,7 +32,7 @@
             android:layout_marginStart="@dimen/app_margin"
             android:text="@{viewModel.title}"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 

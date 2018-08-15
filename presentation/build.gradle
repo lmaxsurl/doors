@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "ru.mail1998.logunov.maxim.doors"
+        applicationId rootProject.applicationId
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
@@ -47,7 +47,6 @@ dependencies {
     // Arch
     implementation "android.arch.lifecycle:extensions:$archVersion"
     implementation "android.arch.lifecycle:viewmodel:$archVersion"
-//    implementation "android.arch.lifecycle:common-java8:$archVersion"
 
     //Binding
     annotationProcessor "com.android.databinding:compiler:$bindingVersion"

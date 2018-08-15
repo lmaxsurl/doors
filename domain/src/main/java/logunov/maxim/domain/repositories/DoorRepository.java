@@ -11,5 +11,4 @@ public interface DoorRepository {
     Observable<List<Door>> getDoors(String doorClass, String doorType);
 
     Observable<List<Type>> getDoorTypes(String doorClass);
-
 }

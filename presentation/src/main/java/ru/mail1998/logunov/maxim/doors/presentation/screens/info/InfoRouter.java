@@ -18,14 +18,12 @@ public class InfoRouter extends BaseRouter<InfoActivity> {
     public void openDial(String number) {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
         activity.startActivity(intent);
-        startAnimation();
     }
 
     // open website
     public void openWebsite(String url){
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         activity.startActivity(intent);
-        startAnimation();
     }
 
 }

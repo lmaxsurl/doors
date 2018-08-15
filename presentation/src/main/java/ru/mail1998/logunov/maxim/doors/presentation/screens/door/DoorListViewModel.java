@@ -16,6 +16,8 @@ import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
 import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
+
 public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
 
     private String doorsClass;
@@ -37,6 +39,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         showProgressBar();
     }
 
+    //method that show high quality image of metal door
     private void showImage(Door door) {
         doorUrl.set(door.getHighQualityDoorUrl());
         showDoor.set(true);
@@ -48,7 +51,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         this.doorsType = doorsType;
 
         //this code below working only with metal doors
-        if (doorsClass.equals(Extras.METAL_DOOR_CLASS))
+        if (doorsClass.equals(METAL_DOOR_CLASS))
             adapter.observeItemClick()
                     .subscribe(new Observer<ClickedItemModel>() {
                         @Override
@@ -107,7 +110,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         getData();
     }
 
-    // hide hight quality image after click
+    // hide high quality image after click
     public void hideImage() {
         showDoor.set(false);
         doorUrl.set(NULL_URL);

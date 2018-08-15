@@ -11,7 +11,6 @@ public class DoorItemViewModel extends BaseItemViewModel<Door> {
     public ObservableField<String> imageUrl = new ObservableField<>("");
     public ObservableField<String> description = new ObservableField<>("");
 
-
     @Override
     public void setItem(Door door, int position) {
         description.set(door.getDescription());

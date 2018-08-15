@@ -16,6 +16,8 @@ import ru.mail1998.logunov.maxim.doors.app.App;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.WOOD_DOOR_CLASS;
+
 public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     @Override
     protected void runInject() {
@@ -27,7 +29,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     }
 
     public void onWoodDoorClick(){
-        router.showDoorTypes(Extras.WOOD_DOOR_CLASS);
+        router.showDoorTypes(WOOD_DOOR_CLASS);
     }
 
     public void onMetalDoorClick(){

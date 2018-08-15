@@ -13,13 +13,15 @@ import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
 import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_CLASS;
+
 public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
         ActivityTypesListBinding,
         TypesListRouter> {
 
     public static Intent getIntent(Activity activity, String doorClass){
         Intent intent = new Intent(activity, TypesListActivity.class);
-        intent.putExtra(Extras.EXTRA_DOOR_CLASS, doorClass);
+        intent.putExtra(EXTRA_DOOR_CLASS, doorClass);
         return intent;
     }
 
@@ -49,7 +51,7 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
     protected void onStart() {
         super.onStart();
         // send data to ViewModel
-        viewModel.setDoorClass(getIntent().getStringExtra(Extras.EXTRA_DOOR_CLASS));
+        viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
     }
 
     private void initRecycleView() {

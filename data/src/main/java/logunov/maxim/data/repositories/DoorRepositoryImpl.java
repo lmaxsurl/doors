@@ -49,6 +49,7 @@ public class DoorRepositoryImpl implements DoorRepository {
                         final List<Type> list = new ArrayList<>();
                         for (TypeResponse typeResponse : typeResponses) {
                             Type type = mapType(typeResponse);
+                            //check if list already contains this type
                             if (!list.contains(type))
                                 list.add(type);
                         }

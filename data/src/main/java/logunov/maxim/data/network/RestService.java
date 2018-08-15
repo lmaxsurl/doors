@@ -32,8 +32,8 @@ public class RestService {
     private static final String STRING_TYPE_FORMAT = "type LIKE '%";
     private static final String DOORS_SORT_BY = "title asc";
     private static final String TYPES_SORT_BY = "type asc";
-    private static final int CONNECTION_TIME = 10;
     private static final String TYPE = "type";
+    private static final int CONNECTION_TIME = 10;
 
 
     @Inject

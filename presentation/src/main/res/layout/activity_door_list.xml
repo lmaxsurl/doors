@@ -58,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="@{!viewModel.progressBar &amp;&amp; viewModel.isConnected}"
-            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolBar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <View
             android:layout_width="match_parent"
@@ -71,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_selector"
-            android:layout_margin="40dp"
+            android:layout_margin="@dimen/image_margin"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> viewModel.hideImage()}"
@@ -92,7 +93,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/app_margin"
                 android:contentDescription="@string/door_image"
-                app:imageUrl="@{viewModel.doorUrl}" />
+                app:imageUrl="@{viewModel.doorUrl}"
+                app:error="@{@drawable/error}"/>
         </ru.mail1998.logunov.maxim.doors.custom.FixedSizeFrameLayout>
 
     </android.support.constraint.ConstraintLayout>

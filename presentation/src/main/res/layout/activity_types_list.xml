@@ -15,16 +15,16 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
             style="@style/AppToolBar"
-            app:titleTextColor="@android:color/white"/>
+            app:titleTextColor="@android:color/white" />
 
         <ImageView
             style="@style/NoInternetIcon"
             android:layout_marginBottom="@dimen/app_margin"
+            android:contentDescription="@string/sad_face"
             android:visibility="@{!viewModel.isConnected}"
             app:layout_constraintBottom_toTopOf="@+id/message_tv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:contentDescription="@string/sad_face" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/message_tv"
