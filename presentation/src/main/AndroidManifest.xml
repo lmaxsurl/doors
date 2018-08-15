@@ -14,7 +14,7 @@
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -52,6 +52,9 @@
         <activity
             android:name=".presentation.screens.map.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f72b3c78907c933bbb0ce1fbc3bf931694f4694a" />
     </application>
 
 </manifest>
