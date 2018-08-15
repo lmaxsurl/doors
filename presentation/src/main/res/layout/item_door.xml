@@ -43,7 +43,7 @@
             android:layout_marginStart="@dimen/app_margin"
             android:text="@{viewModel.description}"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/smallTextSize"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
