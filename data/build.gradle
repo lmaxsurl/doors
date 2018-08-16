@@ -6,7 +6,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -15,6 +15,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 
 }
 
@@ -27,6 +29,12 @@ dependencies {
 
     //Inject
     implementation "javax.inject:javax.inject:$javaInjectVersion"
+
+    //Tests
+    //testImplementation "android.arch.persistence.room:testing:$roomVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     //OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
