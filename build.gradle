@@ -31,13 +31,15 @@ ext{
 
     applicationId = "ru.mail1998.logunov.maxim.doors"
 
+    //Map
+    mapsVersion = '15.0.1'
+
     //View
     supportVersion = '27.1.1'
     constraintVersion = '1.1.2'
 
     //Picasso
     picassoVersion = '2.71828'
-    picassoTransformVersion = '2.2.1'
 
     //Recycle
     recycleVersion = '27.1.1'
@@ -65,4 +67,8 @@ ext{
     //Network
     retrofitVersion = '2.4.0'
     okHttpVersion = '3.11.0'
+
+    //Test
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
 }

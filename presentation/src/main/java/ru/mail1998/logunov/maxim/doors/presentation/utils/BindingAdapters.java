@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import ru.mail1998.logunov.maxim.doors.R;
 
 public class BindingAdapters {

@@ -48,10 +48,7 @@ public class DoorRepositoryImpl implements DoorRepository {
                     public List<Type> apply(List<TypeResponse> typeResponses) throws Exception {
                         final List<Type> list = new ArrayList<>();
                         for (TypeResponse typeResponse : typeResponses) {
-                            Type type = mapType(typeResponse);
-                            //check if list already contains this type
-                            if (!list.contains(type))
-                                list.add(type);
+                            list.add(mapType(typeResponse));
                         }
                         return list;
                     }
