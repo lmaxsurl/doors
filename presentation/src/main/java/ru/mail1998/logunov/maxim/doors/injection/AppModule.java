@@ -31,8 +31,8 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public static DoorRepository provideDoorRepository(){
-        return new DoorRepositoryImpl(new RestService(provideServerUrl(), TIMEOUT));
+    public static DoorRepository provideDoorRepository(@Named("SERVER_URL") String url){
+        return new DoorRepositoryImpl(new RestService(url, TIMEOUT));
     }
 
     @Provides

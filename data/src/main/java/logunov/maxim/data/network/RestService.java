@@ -63,13 +63,13 @@ public class RestService {
 
     public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType){
         return restApi
-                .getDoors(doorClass, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
+                .getDoors(doorClass,  100,STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
     public Observable<List<TypeResponse>> getTypes(String doorClass){
         return restApi
-                .getDoorTypes(doorClass, TYPE, TYPES_SORT_BY)
+                .getDoorTypes(doorClass, 100, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 

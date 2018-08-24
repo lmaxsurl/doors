@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import logunov.maxim.domain.entity.Door;
 import logunov.maxim.domain.usecases.GetListDoorUserCase;
 import ru.mail1998.logunov.maxim.doors.app.App;
@@ -26,6 +27,22 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     public DoorItemAdapter adapter = new DoorItemAdapter();
     public ObservableBoolean showDoor = new ObservableBoolean(false);
     public ObservableField<String> doorUrl = new ObservableField<>(NULL_URL);
+
+    private Consumer<List<Door>> doOnNext = new Consumer<List<Door>>() {
+        @Override
+        public void accept(List<Door> doors) {
+            adapter.setItems(doors);
+            dismissProgressBar();
+            isConnected.set(true);
+        }
+    };
+
+    private Consumer<ClickedItemModel> doOnClick = new Consumer<ClickedItemModel>() {
+        @Override
+        public void accept(ClickedItemModel clickedItemModel) {
+            showImage((Door) clickedItemModel.getEntity());
+        }
+    };
 
     @Inject
     public GetListDoorUserCase getListDoorUserCase;
@@ -52,58 +69,18 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
 
         //this code below working only with metal doors
         if (doorsClass.equals(METAL_DOOR_CLASS))
-            adapter.observeItemClick()
-                    .subscribe(new Observer<ClickedItemModel>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                            getCompositeDisposable().add(d);
-                        }
-
-                        @Override
-                        public void onNext(ClickedItemModel clickedItemModel) {
-                            showImage((Door) clickedItemModel.getEntity());
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            showErrorMessage(e);
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
+            getCompositeDisposable().add(
+                    adapter.observeItemClick()
+                            .subscribe(doOnClick, doOnError));
         getData();
     }
 
     //method that upload data
     private void getData() {
-        getListDoorUserCase
-                .getDoors(doorsClass, doorsType)
-                .subscribe(new Observer<List<Door>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        getCompositeDisposable().add(d);
-                    }
-
-                    @Override
-                    public void onNext(List<Door> doors) {
-                        adapter.setItems(doors);
-                        dismissProgressBar();
-                        isConnected.set(true);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showErrorMessage(e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        getCompositeDisposable().add(
+                getListDoorUserCase
+                        .getDoors(doorsClass, doorsType)
+                        .subscribe(doOnNext, doOnError));
     }
 
     public void onTryAgainClick() {
@@ -116,10 +93,5 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         doorUrl.set(NULL_URL);
     }
 
-    //show error and hide other views
-    private void showErrorMessage(Throwable throwable) {
-        errorMessage.set(router.getErrorMessage(throwable));
-        isConnected.set(false);
-    }
 
 }

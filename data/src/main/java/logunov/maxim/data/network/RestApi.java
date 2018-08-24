@@ -13,11 +13,13 @@ public interface RestApi {
 
     @GET("data/{class}")
     Observable<List<DoorResponse>> getDoors(@Path("class") String doorClass,
+                                            @Query("pageSize") int size,
                                             @Query("where") String type,
                                             @Query("sortBy") String sort);
 
     @GET("data/{class}")
     Observable<List<TypeResponse>> getDoorTypes(@Path("class") String doorClass,
+                                                @Query("pageSize") int size,
                                                 @Query("props") String type,
                                                 @Query("sortBy") String sort);
 
