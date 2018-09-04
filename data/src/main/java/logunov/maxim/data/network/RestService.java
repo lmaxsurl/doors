@@ -27,20 +27,21 @@ public class RestService {
     private RestApi restApi;
     private Gson gson;
     private ErrorParserTransformer errorParserTransformer;
-    private static final String STRING_TYPE_FORMAT = "type LIKE '%";
-    private static final String DOORS_SORT_BY = "title asc";
-    private static final String TYPES_SORT_BY = "type asc";
-    private static final String TYPE = "type";
+    private final String STRING_TYPE_FORMAT = "type LIKE '%";
+    private final String DOORS_SORT_BY = "title asc";
+    private final String TYPES_SORT_BY = "type asc";
+    private final String TYPE = "type";
+    private final int PAGE_SIZE = 100;
 
     @Inject
-    public RestService(String url, int timeout){
+    public RestService(String url, int timeout) {
         OkHttpClient.Builder okHttpBuilder = new OkHttpClient
                 .Builder()
                 .readTimeout(timeout, TimeUnit.SECONDS)
                 .connectTimeout(timeout, TimeUnit.SECONDS);
 
         // add logs when it's debug
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpBuilder.addInterceptor(logging);
@@ -61,15 +62,15 @@ public class RestService {
         errorParserTransformer = new ErrorParserTransformer(gson);
     }
 
-    public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType){
+    public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType) {
         return restApi
-                .getDoors(doorClass,  100,STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
+                .getDoors(doorClass, PAGE_SIZE, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
-    public Observable<List<TypeResponse>> getTypes(String doorClass){
+    public Observable<List<TypeResponse>> getTypes(String doorClass) {
         return restApi
-                .getDoorTypes(doorClass, 100, TYPE, TYPES_SORT_BY)
+                .getDoorTypes(doorClass, PAGE_SIZE, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 

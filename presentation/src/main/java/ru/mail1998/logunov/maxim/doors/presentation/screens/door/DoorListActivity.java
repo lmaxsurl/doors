@@ -60,8 +60,10 @@ public class DoorListActivity extends BaseMvvmActivity<
     protected void onStart() {
         super.onStart();
         //send data to ViewModel
-        viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
-                getIntent().getStringExtra(EXTRA_DOOR_TYPE));
+        if(viewModel.isNoParams()) {
+            viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
+                    getIntent().getStringExtra(EXTRA_DOOR_TYPE));
+        }
     }
 
     //check if door image is shown

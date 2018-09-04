@@ -65,6 +65,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
     // set door class for uploading data
     public void setDoorClass(String doorClass) {
         this.doorClass = doorClass;
+        noParams = false;
         getData();
     }
 

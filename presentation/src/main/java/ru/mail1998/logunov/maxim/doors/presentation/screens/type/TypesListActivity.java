@@ -51,7 +51,9 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
     protected void onStart() {
         super.onStart();
         // send data to ViewModel
-        viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
+        if(viewModel.isNoParams()) {
+            viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
+        }
     }
 
     private void initRecycleView() {

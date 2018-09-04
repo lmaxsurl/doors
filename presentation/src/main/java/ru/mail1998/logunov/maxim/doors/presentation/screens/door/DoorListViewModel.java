@@ -67,6 +67,8 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         this.doorsClass = doorsClass;
         this.doorsType = doorsType;
 
+        noParams = false;
+
         //this code below working only with metal doors
         if (doorsClass.equals(METAL_DOOR_CLASS))
             getCompositeDisposable().add(
