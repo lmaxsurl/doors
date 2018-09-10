@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import logunov.maxim.domain.entity.DomainModel;
 
-public class TypeResponse implements DomainModel {
+public class TypeResponse implements DataModel {
 
     @SerializedName("type")
     private String type;

@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import logunov.maxim.data.BuildConfig;
+import logunov.maxim.data.entity.DescriptionResponse;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.HttpError;
 import logunov.maxim.data.entity.TypeResponse;
@@ -30,6 +31,7 @@ public class RestService {
     private final String STRING_TYPE_FORMAT = "type LIKE '%";
     private final String DOORS_SORT_BY = "title asc";
     private final String TYPES_SORT_BY = "type asc";
+    private final String DESCRIPTIONS_SORT_BY = "id asc";
     private final String TYPE = "type";
     private final int PAGE_SIZE = 100;
 
@@ -72,6 +74,12 @@ public class RestService {
         return restApi
                 .getDoorTypes(doorClass, PAGE_SIZE, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
+    }
+
+    public  Observable<List<DescriptionResponse>> getDescriptions(){
+        return restApi
+                .getDescriptions(PAGE_SIZE, DESCRIPTIONS_SORT_BY)
+                .compose(errorParserTransformer.<List<DescriptionResponse>, Throwable>parseHttpError());
     }
 
 }

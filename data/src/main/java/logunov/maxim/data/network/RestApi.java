@@ -3,6 +3,7 @@ package logunov.maxim.data.network;
 import java.util.List;
 
 import io.reactivex.Observable;
+import logunov.maxim.data.entity.DescriptionResponse;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.TypeResponse;
 import retrofit2.http.GET;
@@ -22,5 +23,9 @@ public interface RestApi {
                                                 @Query("pageSize") int size,
                                                 @Query("props") String type,
                                                 @Query("sortBy") String sort);
+    @GET("data/description")
+    Observable<List<DescriptionResponse>> getDescriptions(@Query("pageSize") int size,
+                                                          @Query("sortBy") String sort);
+
 
 }

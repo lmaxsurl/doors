@@ -1,5 +1,10 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.info;
 
+import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import ru.mail1998.logunov.maxim.doors.app.App;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 

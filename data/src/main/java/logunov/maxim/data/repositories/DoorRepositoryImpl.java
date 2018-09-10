@@ -6,7 +6,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import logunov.maxim.data.entity.DescriptionResponse;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.data.entity.TypeResponse;
 import logunov.maxim.data.network.RestService;
@@ -24,17 +27,24 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<List<Door>> getDoors(String doorClass, String doorType) {
+    public Observable<List<Door>> getDoors(final String doorClass, String doorType) {
         return restService
                 .getAllDoors(doorClass, doorType)
-                .map(new Function<List<DoorResponse>, List<Door>>() {
+                .flatMap(new Function<List<DoorResponse>, ObservableSource<List<Door>>>() {
                     @Override
-                    public List<Door> apply(List<DoorResponse> doorResponses) throws Exception {
-                        final List<Door> list = new ArrayList<>();
-                        for (DoorResponse doorResponse : doorResponses) {
-                            list.add(mapDoor(doorResponse));
-                        }
-                        return list;
+                    public ObservableSource<List<Door>> apply(final List<DoorResponse> doorResponses) {
+                        return restService
+                                .getDescriptions()
+                                .map(new Function<List<DescriptionResponse>, List<Door>>() {
+                                    @Override
+                                    public List<Door> apply(List<DescriptionResponse> descriptionResponses) {
+                                        List<Door> doors = new ArrayList<>();
+                                        for (DoorResponse doorResponse : doorResponses) {
+                                            doors.add(mapDoor(doorResponse, descriptionResponses));
+                                        }
+                                        return doors;
+                                    }
+                                });
                     }
                 });
     }
@@ -45,7 +55,7 @@ public class DoorRepositoryImpl implements DoorRepository {
                 .getTypes(doorClass)
                 .map(new Function<List<TypeResponse>, List<Type>>() {
                     @Override
-                    public List<Type> apply(List<TypeResponse> typeResponses) throws Exception {
+                    public List<Type> apply(List<TypeResponse> typeResponses) {
                         final List<Type> list = new ArrayList<>();
                         for (TypeResponse typeResponse : typeResponses) {
                             list.add(mapType(typeResponse));
@@ -55,10 +65,10 @@ public class DoorRepositoryImpl implements DoorRepository {
                 });
     }
 
-    // transform DoorResponse to Door
-    private Door mapDoor(DoorResponse doorResponse) {
+    // transform DoorResponse to Door with description
+    private Door mapDoor(DoorResponse doorResponse, List<DescriptionResponse> descriptionResponses) {
         return new Door(doorResponse.getTitle(),
-                doorResponse.getDescription(),
+                descriptionResponses.get(doorResponse.getDescription_id() - 1).getDescription(),
                 doorResponse.getDoorUrl(),
                 doorResponse.getHighQualityDoorUrl());
     }

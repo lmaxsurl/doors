@@ -2,7 +2,7 @@ package logunov.maxim.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DoorResponse {
+public class DoorResponse implements DataModel {
 
     @SerializedName("title")
     private String title;
@@ -16,8 +16,8 @@ public class DoorResponse {
     @SerializedName("type")
     private String type;
 
-    @SerializedName("description")
-    private String description;
+    @SerializedName("description_id")
+    private int description_id;
 
     public String getTitle() {
         return title;
@@ -31,11 +31,11 @@ public class DoorResponse {
         return type;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getHighQualityDoorUrl() {
         return highQualityDoorUrl;
+    }
+
+    public int getDescription_id() {
+        return description_id;
     }
 }
