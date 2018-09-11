@@ -33,7 +33,7 @@ public class RestService {
     private final String TYPES_SORT_BY = "type asc";
     private final String DESCRIPTIONS_SORT_BY = "id asc";
     private final String TYPE = "type";
-    private final int PAGE_SIZE = 100;
+    private final int MAX_SIZE = 100;
 
     @Inject
     public RestService(String url, int timeout) {
@@ -64,21 +64,21 @@ public class RestService {
         errorParserTransformer = new ErrorParserTransformer(gson);
     }
 
-    public Observable<List<DoorResponse>> getAllDoors(String doorClass, String doorType) {
+    public Observable<List<DoorResponse>> getDoors(String doorClass, String doorType, int offset, int pageSize) {
         return restApi
-                .getDoors(doorClass, PAGE_SIZE, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
+                .getDoors(doorClass, offset, pageSize, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
     public Observable<List<TypeResponse>> getTypes(String doorClass) {
         return restApi
-                .getDoorTypes(doorClass, PAGE_SIZE, TYPE, TYPES_SORT_BY)
+                .getDoorTypes(doorClass, MAX_SIZE, TYPE, TYPES_SORT_BY)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 
     public  Observable<List<DescriptionResponse>> getDescriptions(){
         return restApi
-                .getDescriptions(PAGE_SIZE, DESCRIPTIONS_SORT_BY)
+                .getDescriptions(MAX_SIZE, DESCRIPTIONS_SORT_BY)
                 .compose(errorParserTransformer.<List<DescriptionResponse>, Throwable>parseHttpError());
     }
 

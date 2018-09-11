@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import logunov.maxim.domain.entity.Door;
 import logunov.maxim.domain.usecases.GetListDoorUserCase;
 import ru.mail1998.logunov.maxim.doors.app.App;
+import ru.mail1998.logunov.maxim.doors.custom.recycler.OffsetAndLimit;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
-import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
 
@@ -23,6 +23,8 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
 
     private String doorsClass;
     private String doorsType;
+    private int offset = 0;
+    public final int PAGE_SIZE = 5;
     private final String NULL_URL = "null";
     public DoorItemAdapter adapter = new DoorItemAdapter();
     public ObservableBoolean showDoor = new ObservableBoolean(false);
@@ -31,7 +33,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     private Consumer<List<Door>> doOnNext = new Consumer<List<Door>>() {
         @Override
         public void accept(List<Door> doors) {
-            adapter.setItems(doors);
+            adapter.addItems(doors);
             dismissProgressBar();
             isConnected.set(true);
         }
@@ -41,6 +43,14 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         @Override
         public void accept(ClickedItemModel clickedItemModel) {
             showImage((Door) clickedItemModel.getEntity());
+        }
+    };
+
+    private Consumer<OffsetAndLimit> doOnScroll = new Consumer<OffsetAndLimit>() {
+        @Override
+        public void accept(OffsetAndLimit offsetAndLimit) {
+            offset = offsetAndLimit.getOffset();
+            getData();
         }
     };
 
@@ -63,7 +73,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     }
 
     //set params for uploading data
-    public void setDoorsParams(String doorsClass, String doorsType) {
+    public void setDataParams(String doorsClass, String doorsType) {
         this.doorsClass = doorsClass;
         this.doorsType = doorsType;
 
@@ -74,6 +84,8 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
             getCompositeDisposable().add(
                     adapter.observeItemClick()
                             .subscribe(doOnClick, doOnError));
+        else
+            adapter.setItemClickedEnabled(false);
         getData();
     }
 
@@ -81,8 +93,20 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     private void getData() {
         getCompositeDisposable().add(
                 getListDoorUserCase
-                        .getDoors(doorsClass, doorsType)
+                        .getDoors(doorsClass, doorsType, offset, PAGE_SIZE)
                         .subscribe(doOnNext, doOnError));
+    }
+
+    public void subscribeScrolledItems(Observable<OffsetAndLimit> observable) {
+        getCompositeDisposable().add(
+                observable
+                        .filter(new Predicate<OffsetAndLimit>() {
+                            @Override
+                            public boolean test(OffsetAndLimit offsetAndLimit) {
+                                return offset < offsetAndLimit.getOffset();
+                            }
+                        })
+                        .subscribe(doOnScroll, doOnError));
     }
 
     public void onTryAgainClick() {
@@ -94,6 +118,5 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         showDoor.set(false);
         doorUrl.set(NULL_URL);
     }
-
 
 }

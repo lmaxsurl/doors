@@ -17,7 +17,7 @@ public class DoorResponse implements DataModel {
     private String type;
 
     @SerializedName("description_id")
-    private int description_id;
+    private int descriptionId;
 
     public String getTitle() {
         return title;
@@ -35,7 +35,7 @@ public class DoorResponse implements DataModel {
         return highQualityDoorUrl;
     }
 
-    public int getDescription_id() {
-        return description_id;
+    public int getDescriptionId() {
+        return descriptionId;
     }
 }

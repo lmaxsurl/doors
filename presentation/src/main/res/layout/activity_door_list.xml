@@ -53,7 +53,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
+        <ru.mail1998.logunov.maxim.doors.custom.recycler.AutoLoadingRecyclerView
             android:id="@+id/door_list_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"

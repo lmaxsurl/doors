@@ -14,6 +14,7 @@ public interface RestApi {
 
     @GET("data/{class}")
     Observable<List<DoorResponse>> getDoors(@Path("class") String doorClass,
+                                            @Query("offset") int offset,
                                             @Query("pageSize") int size,
                                             @Query("where") String type,
                                             @Query("sortBy") String sort);

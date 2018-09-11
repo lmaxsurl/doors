@@ -10,8 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityTypesListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
-import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
-import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
+import ru.mail1998.logunov.maxim.doors.custom.recycler.SimpleDividerItemDecoration;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_CLASS;
 

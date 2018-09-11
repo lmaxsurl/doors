@@ -8,19 +8,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.TestObserver;
-import io.reactivex.subscribers.TestSubscriber;
-import logunov.maxim.data.R;
 import logunov.maxim.data.entity.DoorResponse;
 import logunov.maxim.domain.entity.Error;
 import logunov.maxim.domain.entity.ErrorType;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-
-import static org.mockito.Mockito.when;
 
 public class ApiTest {
 
@@ -55,7 +50,7 @@ public class ApiTest {
         TestObserver<List<DoorResponse>> observer = TestObserver.create();
 
         restService
-                .getAllDoors("df", "fd")
+                .getDoors("df", "fd")
                 .subscribe(observer);
 
         observer.assertError(new Predicate<Throwable>() {
@@ -79,7 +74,7 @@ public class ApiTest {
         TestObserver<List<DoorResponse>> observer = TestObserver.create();
 
         restService
-                .getAllDoors("fd", "fd")
+                .getDoors("fd", "fd")
                 .subscribe(observer);
         observer.awaitTerminalEvent(OKHTTP_TIMEOUT_SECOND + 1, TimeUnit.SECONDS);
 

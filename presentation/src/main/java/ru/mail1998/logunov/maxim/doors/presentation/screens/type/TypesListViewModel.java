@@ -69,7 +69,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
         getData();
     }
 
-    // method that called when button 'try again' clicked
+    // method that called when button 'try again' was clicked
     public void tryAgainClick() {
         getData();
     }

@@ -17,7 +17,7 @@ public abstract class BaseRecyclerViewAdapter<
         extends RecyclerView.Adapter<BaseItemViewHolder<Entity, VM, ?>>{
 
     private List<Entity> items = new ArrayList<>();
-    protected boolean isItemClickedEnabled = true;
+    private boolean isItemClickedEnabled = true;
     private PublishSubject<ClickedItemModel> itemClickSubject = PublishSubject.create();
 
     @Override
@@ -62,7 +62,7 @@ public abstract class BaseRecyclerViewAdapter<
 
     public void addItems(List<Entity> items){
         this.items.addAll(items);
-        notifyItemRangeInserted(items.size() - 1, items.size());
+        notifyItemRangeInserted(this.items.size() - items.size(), items.size());
     }
 
     public void clear(){
@@ -91,6 +91,10 @@ public abstract class BaseRecyclerViewAdapter<
         if (isItemClickedEnabled) {
             holder.itemView.setOnClickListener(null);
         }
+    }
+
+    public void setItemClickedEnabled(boolean isItemClickedEnabled){
+        this.isItemClickedEnabled = isItemClickedEnabled;
     }
 
     public Observable<ClickedItemModel> observeItemClick(){

@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import logunov.maxim.data.entity.DescriptionResponse;
 import logunov.maxim.data.entity.DoorResponse;
@@ -20,27 +19,33 @@ import logunov.maxim.domain.repositories.DoorRepository;
 public class DoorRepositoryImpl implements DoorRepository {
 
     private RestService restService;
+    private Observable<List<DescriptionResponse>> descriptions;
 
     @Inject
     public DoorRepositoryImpl(RestService restService) {
         this.restService = restService;
+        descriptions = this.restService
+                .getDescriptions()
+                .cache();
     }
 
     @Override
-    public Observable<List<Door>> getDoors(final String doorClass, String doorType) {
+    public Observable<List<Door>> getDoors(final String doorClass, String doorType, int offset, int pageSize) {
         return restService
-                .getAllDoors(doorClass, doorType)
+                .getDoors(doorClass, doorType, offset, pageSize)
                 .flatMap(new Function<List<DoorResponse>, ObservableSource<List<Door>>>() {
                     @Override
                     public ObservableSource<List<Door>> apply(final List<DoorResponse> doorResponses) {
-                        return restService
-                                .getDescriptions()
+                        return descriptions
                                 .map(new Function<List<DescriptionResponse>, List<Door>>() {
                                     @Override
                                     public List<Door> apply(List<DescriptionResponse> descriptionResponses) {
                                         List<Door> doors = new ArrayList<>();
                                         for (DoorResponse doorResponse : doorResponses) {
-                                            doors.add(mapDoor(doorResponse, descriptionResponses));
+                                            doors.add(mapDoor(doorResponse,
+                                                    descriptionResponses
+                                                            .get(doorResponse.getDescriptionId() - 1)
+                                                            .getDescription()));
                                         }
                                         return doors;
                                     }
@@ -66,9 +71,9 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     // transform DoorResponse to Door with description
-    private Door mapDoor(DoorResponse doorResponse, List<DescriptionResponse> descriptionResponses) {
+    private Door mapDoor(DoorResponse doorResponse, String description) {
         return new Door(doorResponse.getTitle(),
-                descriptionResponses.get(doorResponse.getDescription_id() - 1).getDescription(),
+                description,
                 doorResponse.getDoorUrl(),
                 doorResponse.getHighQualityDoorUrl());
     }

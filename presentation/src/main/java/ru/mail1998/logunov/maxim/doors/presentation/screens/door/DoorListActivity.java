@@ -10,8 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityDoorListBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
-import ru.mail1998.logunov.maxim.doors.presentation.recycler.SimpleDividerItemDecoration;
-import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
+import ru.mail1998.logunov.maxim.doors.custom.recycler.SimpleDividerItemDecoration;
+
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_CLASS;
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_TYPE;
 
@@ -54,6 +54,8 @@ public class DoorListActivity extends BaseMvvmActivity<
         binding.doorListRv.setAdapter(viewModel.adapter);
         binding.doorListRv.setHasFixedSize(true);
         binding.doorListRv.addItemDecoration(new SimpleDividerItemDecoration(this));
+        binding.doorListRv.setLimit(viewModel.PAGE_SIZE);
+        viewModel.subscribeScrolledItems(binding.doorListRv.observeScrolledData());
     }
 
     @Override
@@ -61,7 +63,7 @@ public class DoorListActivity extends BaseMvvmActivity<
         super.onStart();
         //send data to ViewModel
         if(viewModel.isNoParams()) {
-            viewModel.setDoorsParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
+            viewModel.setDataParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
                     getIntent().getStringExtra(EXTRA_DOOR_TYPE));
         }
     }

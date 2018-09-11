@@ -1,4 +1,4 @@
-package ru.mail1998.logunov.maxim.doors.presentation.recycler;
+package ru.mail1998.logunov.maxim.doors.custom.recycler;
 
 import android.content.Context;
 import android.graphics.Canvas;
