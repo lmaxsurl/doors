@@ -21,9 +21,9 @@ public class GetListDoorUserCase extends BaseUseCase {
     }
 
     //return result of server request
-    public Observable<List<Door>> getDoors(String doorClass, String doorType, int offset, int pageSize) {
+    public Observable<List<Door>> getDoors(String doorClass, int typeId, int offset, int pageSize) {
         return doorRepository
-                .getDoors(doorClass, doorType, offset, pageSize)
+                .getDoors(doorClass, typeId, offset, pageSize)
                 .subscribeOn(executionThread)
                 .observeOn(postExecutionThread);
     }

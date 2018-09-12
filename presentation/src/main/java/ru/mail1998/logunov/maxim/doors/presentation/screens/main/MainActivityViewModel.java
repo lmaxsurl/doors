@@ -29,7 +29,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     }
 
     public void onWoodDoorClick(){
-        router.showDoorTypes(WOOD_DOOR_CLASS);
+        router.showDoorTypes();
     }
 
     public void onMetalDoorClick(){

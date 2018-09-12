@@ -1,5 +1,6 @@
 package logunov.maxim.data.network;
 
+import java.sql.Types;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -19,14 +20,12 @@ public interface RestApi {
                                             @Query("where") String type,
                                             @Query("sortBy") String sort);
 
-    @GET("data/{class}")
-    Observable<List<TypeResponse>> getDoorTypes(@Path("class") String doorClass,
-                                                @Query("pageSize") int size,
-                                                @Query("props") String type,
-                                                @Query("sortBy") String sort);
+    @GET("data/types")
+    Observable<List<TypeResponse>> getTypes(@Query("offset") int offset,
+                                            @Query("pageSize") int size,
+                                            @Query("sortBy") String sort);
     @GET("data/description")
     Observable<List<DescriptionResponse>> getDescriptions(@Query("pageSize") int size,
                                                           @Query("sortBy") String sort);
-
 
 }

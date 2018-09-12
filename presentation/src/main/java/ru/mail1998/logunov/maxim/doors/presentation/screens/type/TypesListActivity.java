@@ -18,10 +18,8 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
         ActivityTypesListBinding,
         TypesListRouter> {
 
-    public static Intent getIntent(Activity activity, String doorClass){
-        Intent intent = new Intent(activity, TypesListActivity.class);
-        intent.putExtra(EXTRA_DOOR_CLASS, doorClass);
-        return intent;
+    public static Intent getIntent(Activity activity){
+        return new Intent(activity, TypesListActivity.class);
     }
 
     @Override
@@ -46,19 +44,12 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
         setSupportActionBar(binding.toolBar);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // send data to ViewModel
-        if(viewModel.isNoParams()) {
-            viewModel.setDoorClass(getIntent().getStringExtra(EXTRA_DOOR_CLASS));
-        }
-    }
-
     private void initRecycleView() {
         binding.typesListRv.setLayoutManager(new LinearLayoutManager(this));
         binding.typesListRv.setAdapter(viewModel.adapter);
         binding.typesListRv.setHasFixedSize(true);
         binding.typesListRv.addItemDecoration(new SimpleDividerItemDecoration(this));
+        binding.typesListRv.setLimit(viewModel.PAGE_SIZE);
+        viewModel.subscribeScrolledItems(binding.typesListRv.observeScrolledData());
     }
 }

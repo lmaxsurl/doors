@@ -79,9 +79,6 @@ public class AutoLoadingRecyclerView extends RecyclerView {
         return limit;
     }
 
-    /**
-     * required method
-     */
     public void setLimit(int limit) {
         this.limit = limit;
     }

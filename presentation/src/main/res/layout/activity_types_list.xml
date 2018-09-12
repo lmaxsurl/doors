@@ -55,13 +55,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
+        <ru.mail1998.logunov.maxim.doors.custom.recycler.AutoLoadingRecyclerView
             android:id="@+id/types_list_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="@{!viewModel.progressBar &amp;&amp; viewModel.isConnected}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolBar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
     </android.support.constraint.ConstraintLayout>
 

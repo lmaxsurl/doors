@@ -30,9 +30,9 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<List<Door>> getDoors(final String doorClass, String doorType, int offset, int pageSize) {
+    public Observable<List<Door>> getDoors(final String doorClass, int typeId, int offset, int pageSize) {
         return restService
-                .getDoors(doorClass, doorType, offset, pageSize)
+                .getDoors(doorClass, typeId, offset, pageSize)
                 .flatMap(new Function<List<DoorResponse>, ObservableSource<List<Door>>>() {
                     @Override
                     public ObservableSource<List<Door>> apply(final List<DoorResponse> doorResponses) {
@@ -55,9 +55,9 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<List<Type>> getDoorTypes(String doorClass) {
+    public Observable<List<Type>> getTypes(int offset, int pageSize) {
         return restService
-                .getTypes(doorClass)
+                .getTypes(offset, pageSize)
                 .map(new Function<List<TypeResponse>, List<Type>>() {
                     @Override
                     public List<Type> apply(List<TypeResponse> typeResponses) {
@@ -80,7 +80,7 @@ public class DoorRepositoryImpl implements DoorRepository {
 
     // transform TypeResponse to Type
     private Type mapType(TypeResponse typeResponse) {
-        return new Type(typeResponse.getType());
+        return new Type(typeResponse.getType(), typeResponse.getId());
     }
 
 }

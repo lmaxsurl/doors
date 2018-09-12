@@ -22,7 +22,7 @@ import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DO
 public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
 
     private String doorsClass;
-    private String doorsType;
+    private int typeId;
     private int offset = 0;
     public final int PAGE_SIZE = 5;
     private final String NULL_URL = "null";
@@ -73,9 +73,9 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     }
 
     //set params for uploading data
-    public void setDataParams(String doorsClass, String doorsType) {
+    public void setDataParams(String doorsClass, int typeId) {
         this.doorsClass = doorsClass;
-        this.doorsType = doorsType;
+        this.typeId = typeId;
 
         noParams = false;
 
@@ -93,7 +93,7 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
     private void getData() {
         getCompositeDisposable().add(
                 getListDoorUserCase
-                        .getDoors(doorsClass, doorsType, offset, PAGE_SIZE)
+                        .getDoors(doorsClass, typeId, offset, PAGE_SIZE)
                         .subscribe(doOnNext, doOnError));
     }
 

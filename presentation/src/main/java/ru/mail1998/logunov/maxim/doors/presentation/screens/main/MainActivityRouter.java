@@ -18,8 +18,8 @@ public class MainActivityRouter extends BaseRouter<MainActivity> {
     }
 
     // open activity with types of wood doors
-    public void showDoorTypes(String doorClass){
-        activity.startActivity(TypesListActivity.getIntent(activity, doorClass));
+    public void showDoorTypes(){
+        activity.startActivity(TypesListActivity.getIntent(activity));
     }
 
     // open activity with metal doors

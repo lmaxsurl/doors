@@ -32,23 +32,9 @@ public class GetListTypeUseCase extends BaseUseCase {
     }
 
     //return result of server request
-    public Observable<List<Type>> getTypes(String doorClass) {
+    public Observable<List<Type>> getTypes(int offset, int pageSize) {
         return doorRepository
-                .getDoorTypes(doorClass)
-                .filter(new Predicate<List<Type>>() {
-                    @Override
-                    public boolean test(List<Type> types) {
-                        List<Type> list = new ArrayList<>();
-                        for(Type type : types){
-                            //check if list already contains this type
-                            if (!list.contains(type))
-                                list.add(type);
-                        }
-                        types.clear();
-                        types.addAll(list);
-                        return true;
-                    }
-                })
+                .getTypes(offset, pageSize)
                 .subscribeOn(executionThread)
                 .observeOn(postExecutionThread);
     }

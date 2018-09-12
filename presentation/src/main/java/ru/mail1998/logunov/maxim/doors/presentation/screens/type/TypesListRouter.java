@@ -10,8 +10,8 @@ public class TypesListRouter extends BaseRouter<TypesListActivity> {
     }
 
     // open new activity with necessary door class and type
-    public void goToDoorList(String doorClass, String doorType) {
-        activity.startActivity(DoorListActivity.getIntent(activity, doorClass, doorType));
+    public void goToDoorList(String doorClass, int typeId) {
+        activity.startActivity(DoorListActivity.getIntent(activity, doorClass, typeId));
     }
 
 }

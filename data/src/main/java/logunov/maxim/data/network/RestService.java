@@ -28,11 +28,9 @@ public class RestService {
     private RestApi restApi;
     private Gson gson;
     private ErrorParserTransformer errorParserTransformer;
-    private final String STRING_TYPE_FORMAT = "type LIKE '%";
-    private final String DOORS_SORT_BY = "title asc";
-    private final String TYPES_SORT_BY = "type asc";
-    private final String DESCRIPTIONS_SORT_BY = "id asc";
-    private final String TYPE = "type";
+    private final String TYPE_ID_EQUALS = "type_id = ";
+    private final String SORT_BY_TYPE = "title asc";
+    private final String SORT_BY_ID = "id asc";
     private final int MAX_SIZE = 100;
 
     @Inject
@@ -64,21 +62,22 @@ public class RestService {
         errorParserTransformer = new ErrorParserTransformer(gson);
     }
 
-    public Observable<List<DoorResponse>> getDoors(String doorClass, String doorType, int offset, int pageSize) {
+    public Observable<List<DoorResponse>> getDoors(String doorClass, int typeId,
+                                                   int offset, int pageSize) {
         return restApi
-                .getDoors(doorClass, offset, pageSize, STRING_TYPE_FORMAT + doorType + "%'", DOORS_SORT_BY)
+                .getDoors(doorClass, offset, pageSize, TYPE_ID_EQUALS + typeId, SORT_BY_TYPE)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
-    public Observable<List<TypeResponse>> getTypes(String doorClass) {
+    public Observable<List<TypeResponse>> getTypes(int offset, int pageSize) {
         return restApi
-                .getDoorTypes(doorClass, MAX_SIZE, TYPE, TYPES_SORT_BY)
+                .getTypes(offset, pageSize, SORT_BY_ID)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 
     public  Observable<List<DescriptionResponse>> getDescriptions(){
         return restApi
-                .getDescriptions(MAX_SIZE, DESCRIPTIONS_SORT_BY)
+                .getDescriptions(MAX_SIZE, SORT_BY_ID)
                 .compose(errorParserTransformer.<List<DescriptionResponse>, Throwable>parseHttpError());
     }
 

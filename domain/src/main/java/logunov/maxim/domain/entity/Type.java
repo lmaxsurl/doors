@@ -4,6 +4,13 @@ public class Type implements DomainModel {
 
     private String type;
 
+    private int id;
+
+    public Type(String type, int id) {
+        this.type = type;
+        this.id = id;
+    }
+
     public String getType() {
         return type;
     }
@@ -12,12 +19,11 @@ public class Type implements DomainModel {
         this.type = type;
     }
 
-    public Type(String type) {
-        this.type = type;
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Type && ((Type) obj).getType().equalsIgnoreCase(this.type);
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -14,7 +14,6 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.TestObserver;
 import io.reactivex.schedulers.TestScheduler;
-import logunov.maxim.domain.entity.Door;
 import logunov.maxim.domain.entity.Type;
 import logunov.maxim.domain.repositories.DoorRepository;
 import logunov.maxim.domain.usecases.GetListTypeUseCase;
@@ -41,20 +40,20 @@ public class GetListTypeUseCaseTest {
     public void getTypesTest(){
         String doorClass = "wood_doors";
         List<Type> types = new ArrayList<>();
-        types.add(new Type("a"));
-        types.add(new Type("b"));
-        types.add(new Type("c"));
-        types.add(new Type("b"));
-        types.add(new Type("b"));
-        types.add(new Type("c"));
-        types.add(new Type("c"));
-        types.add(new Type("b"));
-        types.add(new Type("a"));
+        types.add(new Type("a", id));
+        types.add(new Type("b", id));
+        types.add(new Type("c", id));
+        types.add(new Type("b", id));
+        types.add(new Type("b", id));
+        types.add(new Type("c", id));
+        types.add(new Type("c", id));
+        types.add(new Type("b", id));
+        types.add(new Type("a", id));
 
         final List<Type> currentList = new ArrayList<>();
-        currentList.add(new Type("a"));
-        currentList.add(new Type("b"));
-        currentList.add(new Type("c"));
+        currentList.add(new Type("a", id));
+        currentList.add(new Type("b", id));
+        currentList.add(new Type("c", id));
 
         when(doorRepository.getDoorTypes(doorClass)).thenReturn(Observable.just(types));
 
