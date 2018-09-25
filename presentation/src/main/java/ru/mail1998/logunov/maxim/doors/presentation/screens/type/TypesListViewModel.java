@@ -23,6 +23,8 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
     public TypeItemAdapter adapter = new TypeItemAdapter();
     private int offset = 0;
     public final int PAGE_SIZE = 5;
+    private String doorClass;
+    private String doorTypes;
 
     private Consumer<List<Type>> doOnNext = new Consumer<List<Type>>() {
         @Override
@@ -37,7 +39,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
         @Override
         public void accept(ClickedItemModel clickedItemModel) {
             if (clickedItemModel.getEntity() instanceof Type) {
-                router.goToDoorList(WOOD_DOOR_CLASS,
+                router.goToDoorList(doorClass,
                         ((Type) clickedItemModel.getEntity()).getId());
             }
         }
@@ -67,14 +69,13 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
                 adapter.observeItemClick()
                         .subscribe(doOnClick, doOnError));
 
-        getData();
     }
 
     // method that load data from server
     private void getData() {
         getCompositeDisposable().add(
                 getListTypeUseCase
-                        .getTypes(offset, PAGE_SIZE)
+                        .getTypes(doorTypes, offset, PAGE_SIZE)
                         .subscribe(doOnNext, doOnError));
     }
 
@@ -92,6 +93,12 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
 
     // method that called when button 'try again' was clicked
     public void tryAgainClick() {
+        getData();
+    }
+
+    public void setParams(String doorClass, String doorTypes){
+        this.doorClass = doorClass;
+        this.doorTypes = doorTypes;
         getData();
     }
 }

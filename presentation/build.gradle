@@ -36,20 +36,6 @@ android {
     }
 }
 
-task qaToFabric(dependsOn: "assembleRelease") {
-
-    doLast {
-
-        def groupName = "qa"
-        def releaseNotes = ""
-
-        def task = tasks.getByName("crashlyticsUploadDistributionRelease")
-        task.ext.betaDistributionReleaseNotes = releaseNotes
-        task.ext.betaDistributionGroupAliases = groupName
-        task.execute()
-    }
-}
-
 
 dependencies {
     //View
@@ -61,6 +47,9 @@ dependencies {
 
     //Picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //PhotoView
+    implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
 
     //RecycleView
     implementation "com.android.support:recyclerview-v7:$recycleVersion"
@@ -87,8 +76,9 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
     //Crashlytics
-    implementation project(path: ':data')
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
         transitive = true;
     }
+
+    implementation project(path: ':data')
 }

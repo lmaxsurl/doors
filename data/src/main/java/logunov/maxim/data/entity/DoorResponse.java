@@ -13,9 +13,6 @@ public class DoorResponse implements DataModel {
     @SerializedName("hq_door_url")
     private String highQualityDoorUrl;
 
-    @SerializedName("type")
-    private String type;
-
     @SerializedName("description_id")
     private int descriptionId;
 
@@ -25,10 +22,6 @@ public class DoorResponse implements DataModel {
 
     public String getDoorUrl() {
         return doorUrl;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getHighQualityDoorUrl() {

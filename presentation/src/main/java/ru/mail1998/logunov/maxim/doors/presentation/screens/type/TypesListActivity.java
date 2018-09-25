@@ -13,13 +13,20 @@ import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 import ru.mail1998.logunov.maxim.doors.custom.recycler.SimpleDividerItemDecoration;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_CLASS;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.EXTRA_DOOR_TYPES;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.WOOD_DOOR_CLASS;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.WOOD_DOOR_TYPES;
 
 public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
         ActivityTypesListBinding,
         TypesListRouter> {
 
-    public static Intent getIntent(Activity activity){
-        return new Intent(activity, TypesListActivity.class);
+    public static Intent getIntent(Activity activity, String doorType, String doorClass) {
+        Intent intent = new Intent(activity, TypesListActivity.class);
+        intent.putExtra(EXTRA_DOOR_TYPES, doorType);
+        intent.putExtra(EXTRA_DOOR_CLASS, doorClass);
+        return intent;
     }
 
     @Override
@@ -40,8 +47,18 @@ public class TypesListActivity extends BaseMvvmActivity<TypesListViewModel,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
+    }
+
+    private void init() {
         initRecycleView();
         setSupportActionBar(binding.toolBar);
+        setDoorParams();
+    }
+
+    private void setDoorParams() {
+        viewModel.setParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
+                getIntent().getStringExtra(EXTRA_DOOR_TYPES));
     }
 
     private void initRecycleView() {

@@ -2,11 +2,9 @@ package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-
+import android.widget.ImageView;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
@@ -17,14 +15,12 @@ import ru.mail1998.logunov.maxim.doors.custom.recycler.OffsetAndLimit;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
 
-import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
-
 public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
 
     private String doorsClass;
     private int typeId;
     private int offset = 0;
-    public final int PAGE_SIZE = 5;
+    public final int PAGE_SIZE = 10;
     private final String NULL_URL = "null";
     public DoorItemAdapter adapter = new DoorItemAdapter();
     public ObservableBoolean showDoor = new ObservableBoolean(false);
@@ -66,26 +62,15 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         showProgressBar();
     }
 
-    //method that show high quality image of metal door
-    private void showImage(Door door) {
-        doorUrl.set(door.getHighQualityDoorUrl());
-        showDoor.set(true);
-    }
-
     //set params for uploading data
     public void setDataParams(String doorsClass, int typeId) {
         this.doorsClass = doorsClass;
         this.typeId = typeId;
 
-        noParams = false;
+        getCompositeDisposable().add(
+                adapter.observeItemClick()
+                        .subscribe(doOnClick, doOnError));
 
-        //this code below working only with metal doors
-        if (doorsClass.equals(METAL_DOOR_CLASS))
-            getCompositeDisposable().add(
-                    adapter.observeItemClick()
-                            .subscribe(doOnClick, doOnError));
-        else
-            adapter.setItemClickedEnabled(false);
         getData();
     }
 
@@ -113,10 +98,14 @@ public class DoorListViewModel extends BaseViewModel<DoorListRouter> {
         getData();
     }
 
+    //method that show high quality image of metal door
+    private void showImage(Door door) {
+        doorUrl.set(door.getHighQualityDoorUrl());
+        showDoor.set(true);
+    }
+
     // hide high quality image after click
     public void hideImage() {
         showDoor.set(false);
-        doorUrl.set(NULL_URL);
     }
-
 }

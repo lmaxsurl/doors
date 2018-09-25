@@ -9,7 +9,7 @@ import ru.mail1998.logunov.maxim.doors.presentation.screens.type.TypesListActivi
 import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
-import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_TYPE;
+import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.WOOD_DOOR_TYPES;
 
 public class MainActivityRouter extends BaseRouter<MainActivity> {
 
@@ -17,14 +17,9 @@ public class MainActivityRouter extends BaseRouter<MainActivity> {
         super(activity);
     }
 
-    // open activity with types of wood doors
-    public void showDoorTypes(){
-        activity.startActivity(TypesListActivity.getIntent(activity));
-    }
-
-    // open activity with metal doors
-    public void showMetalDoors(){
-        activity.startActivity(DoorListActivity.getIntent(activity, METAL_DOOR_CLASS, METAL_DOOR_TYPE));
+    // open activity with types of selected doors
+    public void showDoorTypes(String doorType, String doorClass){
+        activity.startActivity(TypesListActivity.getIntent(activity, doorType, doorClass));
     }
 
     //open map with marker

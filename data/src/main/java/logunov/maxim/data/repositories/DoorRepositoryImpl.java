@@ -55,9 +55,9 @@ public class DoorRepositoryImpl implements DoorRepository {
     }
 
     @Override
-    public Observable<List<Type>> getTypes(int offset, int pageSize) {
+    public Observable<List<Type>> getTypes(String doorType, int offset, int pageSize) {
         return restService
-                .getTypes(offset, pageSize)
+                .getTypes(doorType, offset, pageSize)
                 .map(new Function<List<TypeResponse>, List<Type>>() {
                     @Override
                     public List<Type> apply(List<TypeResponse> typeResponses) {

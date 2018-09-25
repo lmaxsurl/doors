@@ -32,9 +32,9 @@ public class GetListTypeUseCase extends BaseUseCase {
     }
 
     //return result of server request
-    public Observable<List<Type>> getTypes(int offset, int pageSize) {
+    public Observable<List<Type>> getTypes(String doorType, int offset, int pageSize) {
         return doorRepository
-                .getTypes(offset, pageSize)
+                .getTypes(doorType, offset, pageSize)
                 .subscribeOn(executionThread)
                 .observeOn(postExecutionThread);
     }

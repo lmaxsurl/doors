@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -9,7 +10,9 @@
             type="ru.mail1998.logunov.maxim.doors.presentation.screens.door.DoorListViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/root_layout"
+        style="@style/AppConstraintLayout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
@@ -61,41 +64,27 @@
             app:layout_constraintTop_toBottomOf="@+id/toolBar"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/shadowColor"
-            android:onClick="@{() -> viewModel.hideImage()}"
-            android:visibility="@{viewModel.showDoor}" />
-
-        <ru.mail1998.logunov.maxim.doors.custom.FixedSizeFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_selector"
-            android:layout_margin="@dimen/image_margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> viewModel.hideImage()}"
+            android:layout_height="0dp"
+            android:background="@color/backgroundColor"
             android:visibility="@{viewModel.showDoor}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/door_list_rv"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
-            <ImageView
+            <com.github.chrisbanes.photoview.PhotoView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/app_margin"
                 android:contentDescription="@string/door_image"
-                app:imageUrl="@{viewModel.doorUrl}"
-                app:error="@{@drawable/error}"/>
-        </ru.mail1998.logunov.maxim.doors.custom.FixedSizeFrameLayout>
+                android:scaleType="fitCenter"
+                app:error="@{@drawable/error}"
+                app:imageUrl="@{viewModel.doorUrl}" />
+        </FrameLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -4,8 +4,10 @@ public class Extras {
 
     public static final String WOOD_DOOR_CLASS = "wood_doors";
     public static final String METAL_DOOR_CLASS = "metal_doors";
-    public static final int METAL_DOOR_TYPE = 0;
+    public static final String WOOD_DOOR_TYPES = "wood_types";
+    public static final String METAL_DOOR_TYPES = "metal_types";
     public static final String EXTRA_DOOR_CLASS = "EXTRA_DOOR_CLASS";
+    public static final String EXTRA_DOOR_TYPES = "EXTRA_DOOR_TYPES";
     public static final String EXTRA_TYPE_ID = "EXTRA_TYPE_ID";
     public static final String MTS_NUMBER = "+375336339291";
     public static final String VELCOM_NUMBER = "+375296798750";

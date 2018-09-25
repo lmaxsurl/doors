@@ -10,6 +10,6 @@ public interface DoorRepository {
 
     Observable<List<Door>> getDoors(String doorClass, int typeId, int offset, int pageSize);
 
-    Observable<List<Type>> getTypes(int offset, int pageSize);
+    Observable<List<Type>> getTypes(String doorType, int offset, int pageSize);
 
 }

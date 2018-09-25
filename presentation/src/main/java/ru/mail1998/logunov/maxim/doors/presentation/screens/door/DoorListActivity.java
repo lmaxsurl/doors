@@ -1,11 +1,15 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.ImageView;
+
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityDoorListBinding;
@@ -20,7 +24,7 @@ public class DoorListActivity extends BaseMvvmActivity<
         ActivityDoorListBinding,
         DoorListRouter> {
 
-    public static Intent getIntent(Activity activity, String doorClass, int typeId){
+    public static Intent getIntent(Activity activity, String doorClass, int typeId) {
         Intent intent = new Intent(activity, DoorListActivity.class);
         intent.putExtra(EXTRA_DOOR_CLASS, doorClass);
         intent.putExtra(EXTRA_TYPE_ID, typeId);
@@ -45,7 +49,21 @@ public class DoorListActivity extends BaseMvvmActivity<
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
+    }
+
+    private void init() {
         initRecyclerView();
+        initActionBar();
+        setDoorsParams();
+    }
+
+    private void setDoorsParams() {
+        viewModel.setDataParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
+                getIntent().getIntExtra(EXTRA_TYPE_ID, 0));
+    }
+
+    private void initActionBar() {
         setSupportActionBar(binding.toolBar);
     }
 
@@ -58,20 +76,10 @@ public class DoorListActivity extends BaseMvvmActivity<
         viewModel.subscribeScrolledItems(binding.doorListRv.observeScrolledData());
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //send data to ViewModel
-        if(viewModel.isNoParams()) {
-            viewModel.setDataParams(getIntent().getStringExtra(EXTRA_DOOR_CLASS),
-                    getIntent().getIntExtra(EXTRA_TYPE_ID, 0));
-        }
-    }
-
     //check if door image is shown
     @Override
     public void onBackPressed() {
-        if(viewModel.showDoor.get())
+        if (viewModel.showDoor.get())
             viewModel.hideImage();
         else
             super.onBackPressed();

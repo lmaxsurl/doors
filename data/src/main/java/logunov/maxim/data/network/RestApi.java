@@ -20,11 +20,13 @@ public interface RestApi {
                                             @Query("where") String type,
                                             @Query("sortBy") String sort);
 
-    @GET("data/types")
-    Observable<List<TypeResponse>> getTypes(@Query("offset") int offset,
+    @GET("data/{class}")
+    Observable<List<TypeResponse>> getTypes(@Path("class") String doorType,
+                                            @Query("offset") int offset,
                                             @Query("pageSize") int size,
                                             @Query("sortBy") String sort);
-    @GET("data/description")
+
+    @GET("data/descriptions")
     Observable<List<DescriptionResponse>> getDescriptions(@Query("pageSize") int size,
                                                           @Query("sortBy") String sort);
 

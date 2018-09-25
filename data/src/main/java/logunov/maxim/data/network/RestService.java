@@ -69,9 +69,9 @@ public class RestService {
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
-    public Observable<List<TypeResponse>> getTypes(int offset, int pageSize) {
+    public Observable<List<TypeResponse>> getTypes(String doorType, int offset, int pageSize) {
         return restApi
-                .getTypes(offset, pageSize, SORT_BY_ID)
+                .getTypes(doorType, offset, pageSize, SORT_BY_ID)
                 .compose(errorParserTransformer.<List<TypeResponse>, HttpError>parseHttpError());
     }
 
