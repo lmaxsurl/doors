@@ -30,4 +30,12 @@ public interface RestApi {
     Observable<List<DescriptionResponse>> getDescriptions(@Query("pageSize") int size,
                                                           @Query("sortBy") String sort);
 
+
+    @GET("data/{class}")
+    Observable<List<DoorResponse>> findDoors(@Path("class") String doorClass,
+                                             @Query("offset") int offset,
+                                             @Query("pageSize") int size,
+                                             @Query("where") String request,
+                                             @Query("sortBy") String sort);
+
 }

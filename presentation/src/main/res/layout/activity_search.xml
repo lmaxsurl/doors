@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ru.mail1998.logunov.maxim.doors.presentation.screens.search.SearchDoorsViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            style="@style/AppToolBar">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/backgroundColor"
+                android:drawableStart="@drawable/ic_search_black_24dp"
+                android:hint="@string/search"
+                android:afterTextChanged="@{(editable) -> viewModel.afterTextChanged(editable)}"
+                android:inputType="text"
+                android:text="@={viewModel.request}" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            style="@style/NoInternetIcon"
+            android:layout_marginBottom="@dimen/app_margin"
+            android:contentDescription="@string/sad_face"
+            android:visibility="@{!viewModel.isConnected}"
+            app:layout_constraintBottom_toTopOf="@+id/message_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/message_tv"
+            style="@style/ErrorEditText"
+            android:text="@{viewModel.errorMessage}"
+            android:visibility="@{!viewModel.isConnected}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            style="@style/NoInternetButton"
+            android:onClick="@{() -> viewModel.onTryAgainClick()}"
+            android:visibility="@{!viewModel.isConnected}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_tv" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.progressBar &amp;&amp; viewModel.isConnected}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ru.mail1998.logunov.maxim.doors.custom.recycler.AutoLoadingRecyclerView
+            android:id="@+id/door_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{!viewModel.progressBar &amp;&amp; viewModel.isConnected}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/backgroundColor"
+            android:visibility="@{viewModel.showDoor}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/door_list_rv">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/door_image"
+                android:scaleType="fitCenter"
+                app:error="@{@drawable/error}"
+                app:imageUrl="@{viewModel.doorUrl}" />
+        </FrameLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

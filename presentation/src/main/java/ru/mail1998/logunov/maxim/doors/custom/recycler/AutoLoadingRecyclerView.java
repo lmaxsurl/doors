@@ -33,7 +33,6 @@ public class AutoLoadingRecyclerView extends RecyclerView {
         init();
     }
 
-
     private void init() {
         startScrollingChannel();
     }

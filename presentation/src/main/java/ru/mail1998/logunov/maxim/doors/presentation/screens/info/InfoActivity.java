@@ -11,7 +11,10 @@ import ru.mail1998.logunov.maxim.doors.databinding.ActivityInfoBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseActivity;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 
-public class InfoActivity extends BaseMvvmActivity<InfoViewModel, ActivityInfoBinding, InfoRouter> {
+public class InfoActivity extends BaseMvvmActivity<
+        InfoViewModel,
+        ActivityInfoBinding,
+        InfoRouter> {
 
     public static Intent getIntent(Activity activity){
         return new Intent(activity, InfoActivity.class);

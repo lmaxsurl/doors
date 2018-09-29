@@ -12,4 +12,6 @@ public interface DoorRepository {
 
     Observable<List<Type>> getTypes(String doorType, int offset, int pageSize);
 
+    Observable<List<Door>> findDoors(String doorClass, String request, int offset, int pageSize);
+
 }

@@ -20,6 +20,26 @@ public class DoorRepositoryImpl implements DoorRepository {
 
     private RestService restService;
     private Observable<List<DescriptionResponse>> descriptions;
+    private Function<List<DoorResponse>, ObservableSource<List<Door>>> doorFlatMap =
+            new Function<List<DoorResponse>, ObservableSource<List<Door>>>() {
+                @Override
+                public ObservableSource<List<Door>> apply(final List<DoorResponse> doorResponses) {
+                    return descriptions
+                            .map(new Function<List<DescriptionResponse>, List<Door>>() {
+                                @Override
+                                public List<Door> apply(List<DescriptionResponse> descriptionResponses) {
+                                    List<Door> doors = new ArrayList<>();
+                                    for (DoorResponse doorResponse : doorResponses) {
+                                        doors.add(mapDoor(doorResponse,
+                                                descriptionResponses
+                                                        .get(doorResponse.getDescriptionId() - 1)
+                                                        .getDescription()));
+                                    }
+                                    return doors;
+                                }
+                            });
+                }
+            };
 
     @Inject
     public DoorRepositoryImpl(RestService restService) {
@@ -33,25 +53,7 @@ public class DoorRepositoryImpl implements DoorRepository {
     public Observable<List<Door>> getDoors(final String doorClass, int typeId, int offset, int pageSize) {
         return restService
                 .getDoors(doorClass, typeId, offset, pageSize)
-                .flatMap(new Function<List<DoorResponse>, ObservableSource<List<Door>>>() {
-                    @Override
-                    public ObservableSource<List<Door>> apply(final List<DoorResponse> doorResponses) {
-                        return descriptions
-                                .map(new Function<List<DescriptionResponse>, List<Door>>() {
-                                    @Override
-                                    public List<Door> apply(List<DescriptionResponse> descriptionResponses) {
-                                        List<Door> doors = new ArrayList<>();
-                                        for (DoorResponse doorResponse : doorResponses) {
-                                            doors.add(mapDoor(doorResponse,
-                                                    descriptionResponses
-                                                            .get(doorResponse.getDescriptionId() - 1)
-                                                            .getDescription()));
-                                        }
-                                        return doors;
-                                    }
-                                });
-                    }
-                });
+                .flatMap(doorFlatMap);
     }
 
     @Override
@@ -68,6 +70,13 @@ public class DoorRepositoryImpl implements DoorRepository {
                         return list;
                     }
                 });
+    }
+
+    @Override
+    public Observable<List<Door>> findDoors(String doorClass, String request, int offset, int pageSize) {
+        return restService
+                .findDoors(doorClass, request, offset, pageSize)
+                .flatMap(doorFlatMap);
     }
 
     // transform DoorResponse to Door with description

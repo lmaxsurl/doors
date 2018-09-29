@@ -20,7 +20,7 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
 
     protected abstract void runInject();
 
-    public ObservableBoolean progressBar = new ObservableBoolean(true);
+    public ObservableBoolean progressBar = new ObservableBoolean(false);
 
     public ObservableBoolean isConnected = new ObservableBoolean(true);
 

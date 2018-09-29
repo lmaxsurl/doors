@@ -2,6 +2,8 @@ package ru.mail1998.logunov.maxim.doors.presentation.screens.door;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.ImageView;
 import java.util.List;
 import javax.inject.Inject;

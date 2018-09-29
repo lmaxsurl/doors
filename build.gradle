@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -25,7 +25,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext{
+ext {
     compileSdkVersion = 27
     minSdkVersion = 19
     targetSdkVersion = 27
@@ -37,7 +37,7 @@ ext{
 
     //View
     supportVersion = '27.1.1'
-    constraintVersion = '1.1.2'
+    constraintVersion = '1.1.3'
 
     //Picasso
     picassoVersion = '2.71828'
@@ -62,7 +62,7 @@ ext{
     archVersion = '1.1.1'
 
     //Binding
-    bindingVersion = '3.0.0'
+    bindingVersion = '3.1.4'
 
     //Dagger
     javaInjectVersion = '1'
@@ -70,7 +70,7 @@ ext{
 
     //Network
     retrofitVersion = '2.4.0'
-    okHttpVersion = '3.11.0'
+    okHttpVersion = '3.10.0'
 
     //Test
     junitVersion = '4.12'

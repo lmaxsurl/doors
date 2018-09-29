@@ -8,7 +8,8 @@ import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.databinding.ActivityMainBinding;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseMvvmActivity;
 
-public class MainActivity extends BaseMvvmActivity<MainActivityViewModel,
+public class MainActivity extends BaseMvvmActivity<
+        MainActivityViewModel,
         ActivityMainBinding,
         MainActivityRouter> {
     @Override

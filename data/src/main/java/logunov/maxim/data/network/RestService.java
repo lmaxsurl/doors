@@ -29,7 +29,7 @@ public class RestService {
     private Gson gson;
     private ErrorParserTransformer errorParserTransformer;
     private final String TYPE_ID_EQUALS = "type_id = ";
-    private final String SORT_BY_TYPE = "title asc";
+    private final String SORT_BY_TITLE = "title asc";
     private final String SORT_BY_ID = "id asc";
     private final int MAX_SIZE = 100;
 
@@ -65,7 +65,7 @@ public class RestService {
     public Observable<List<DoorResponse>> getDoors(String doorClass, int typeId,
                                                    int offset, int pageSize) {
         return restApi
-                .getDoors(doorClass, offset, pageSize, TYPE_ID_EQUALS + typeId, SORT_BY_TYPE)
+                .getDoors(doorClass, offset, pageSize, TYPE_ID_EQUALS + typeId, SORT_BY_TITLE)
                 .compose(errorParserTransformer.<List<DoorResponse>, HttpError>parseHttpError());
     }
 
@@ -79,6 +79,12 @@ public class RestService {
         return restApi
                 .getDescriptions(MAX_SIZE, SORT_BY_ID)
                 .compose(errorParserTransformer.<List<DescriptionResponse>, Throwable>parseHttpError());
+    }
+
+    public Observable<List<DoorResponse>> findDoors(String doorClass, String request, int offset, int pageSize){
+        return restApi
+                .findDoors(doorClass, offset, pageSize, "title LIKE '%" + request + "%'", SORT_BY_TITLE)
+                .compose(errorParserTransformer.<List<DoorResponse>, Throwable>parseHttpError());
     }
 
 }
