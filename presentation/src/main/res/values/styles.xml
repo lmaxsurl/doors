@@ -14,9 +14,7 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
     
-    <style name="MainScreenTextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="AppTextView">
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/item_selector</item>
@@ -40,7 +38,7 @@
         <item name="android:contentDescription">@string/sad_face</item>
     </style>
 
-    <style name="ErrorEditText">
+    <style name="ErrorTextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size</item>
@@ -59,15 +57,11 @@
     </style>
 
     <style name="AppConstraintLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:animateLayoutChanges">true</item>
         <item name="android:background">@color/backgroundColor</item>
     </style>
 
     <style name="InfoTextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/app_padding</item>
         <item name="android:paddingStart">@dimen/app_padding</item>
         <item name="android:paddingEnd">@dimen/app_padding</item>

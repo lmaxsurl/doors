@@ -2,10 +2,7 @@ package ru.mail1998.logunov.maxim.doors.presentation.screens.search;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.text.Editable;
-import android.text.TextWatcher;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +13,6 @@ import io.reactivex.functions.Predicate;
 import logunov.maxim.domain.entity.Door;
 import logunov.maxim.domain.usecases.FindDoorsUseCase;
 import ru.mail1998.logunov.maxim.doors.app.App;
-import ru.mail1998.logunov.maxim.doors.custom.recycler.OffsetAndLimit;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
 import ru.mail1998.logunov.maxim.doors.presentation.screens.door.DoorItemAdapter;
@@ -25,17 +21,18 @@ public class SearchDoorsViewModel extends BaseViewModel<SearchDoorsRouter> {
 
     private String doorsClass;
     private int offset = 0;
+    private String request = "";
     public final int PAGE_SIZE = 10;
     public DoorItemAdapter adapter = new DoorItemAdapter();
     public ObservableBoolean showDoor = new ObservableBoolean(false);
     public ObservableField<String> doorUrl = new ObservableField<>("n");
-    public ObservableField<String> request = new ObservableField<>("");
 
     private Consumer<List<Door>> doOnNext = new Consumer<List<Door>>() {
         @Override
         public void accept(List<Door> doors) {
-            adapter.addItems(doors);
-            dismissProgressBar();
+            if (haveRequest())
+                adapter.addItems(doors);
+            hideProgressBar();
             isConnected.set(true);
         }
     };
@@ -47,10 +44,10 @@ public class SearchDoorsViewModel extends BaseViewModel<SearchDoorsRouter> {
         }
     };
 
-    private Consumer<OffsetAndLimit> doOnScroll = new Consumer<OffsetAndLimit>() {
+    private Consumer<Integer> doOnScroll = new Consumer<Integer>() {
         @Override
-        public void accept(OffsetAndLimit offsetAndLimit) {
-            offset = offsetAndLimit.getOffset();
+        public void accept(Integer integer) {
+            offset = integer;
             findDoors();
         }
     };
@@ -58,7 +55,7 @@ public class SearchDoorsViewModel extends BaseViewModel<SearchDoorsRouter> {
     @Inject
     public FindDoorsUseCase findDoorsUseCase;
 
-    //set params for uploading data
+    //set params for loading data
     public void setDataParams(String doorsClass) {
         this.doorsClass = doorsClass;
 
@@ -67,30 +64,32 @@ public class SearchDoorsViewModel extends BaseViewModel<SearchDoorsRouter> {
                         .subscribe(doOnClick, doOnError));
     }
 
-    public void afterTextChanged(Editable editable) {
+    public void onTextChanged(CharSequence s) {
+        clearRequestHistory();
+        setRequest(s);
+        showProgressBar();
         findDoors();
     }
 
-    //method that upload data
+    //method that load data
     private void findDoors() {
-        if (request.get().length() > 0)
+        if (haveRequest()) {
             getCompositeDisposable().add(
                     findDoorsUseCase
-                            .findDoors(doorsClass, request.get(), offset, PAGE_SIZE)
+                            .findDoors(doorsClass, request, offset, PAGE_SIZE)
                             .subscribe(doOnNext, doOnError));
-        else {
-            adapter.clear();
-            offset = 0;
+        } else {
+            hideProgressBar();
         }
     }
 
-    public void subscribeScrolledItems(Observable<OffsetAndLimit> observable) {
+    public void subscribeScrolledItems(Observable<Integer> observable) {
         getCompositeDisposable().add(
                 observable
-                        .filter(new Predicate<OffsetAndLimit>() {
+                        .filter(new Predicate<Integer>() {
                             @Override
-                            public boolean test(OffsetAndLimit offsetAndLimit) {
-                                return offset < offsetAndLimit.getOffset();
+                            public boolean test(Integer integer) {
+                                return offset < integer;
                             }
                         })
                         .subscribe(doOnScroll, doOnError));
@@ -111,9 +110,34 @@ public class SearchDoorsViewModel extends BaseViewModel<SearchDoorsRouter> {
         showDoor.set(false);
     }
 
+    private void clearRequestHistory() {
+        clearRequest();
+        clearAdapter();
+        nullifyOffset();
+    }
+
+    private void clearRequest() {
+        request = "";
+    }
+
+    private void setRequest(CharSequence s) {
+        this.request = s.toString();
+    }
+
+    private void nullifyOffset() {
+        offset = 0;
+    }
+
+    private void clearAdapter() {
+        adapter.clear();
+    }
+
+    private boolean haveRequest() {
+        return request.length() > 0;
+    }
+
     @Override
     protected void runInject() {
         App.getAppComponent().runInject(this);
     }
-
 }

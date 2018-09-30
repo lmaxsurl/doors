@@ -9,15 +9,10 @@
     </data>
 
     <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
+        style="@style/AppTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_selector"
-        android:gravity="center|start"
-        android:paddingEnd="@dimen/app_padding"
-        android:paddingStart="@dimen/app_padding"
-        android:text="@{viewModel.type}"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size" />
+        android:text="@{viewModel.type}" />
 
 </layout>
 

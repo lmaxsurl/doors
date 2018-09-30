@@ -5,18 +5,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import logunov.maxim.domain.entity.Type;
 import logunov.maxim.domain.usecases.GetListTypeUseCase;
 import ru.mail1998.logunov.maxim.doors.app.App;
-import ru.mail1998.logunov.maxim.doors.custom.recycler.OffsetAndLimit;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
 import ru.mail1998.logunov.maxim.doors.presentation.recycler.ClickedItemModel;
-
-import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.WOOD_DOOR_CLASS;
 
 public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
 
@@ -30,7 +25,7 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
         @Override
         public void accept(List<Type> types) {
             adapter.addItems(types);
-            dismissProgressBar();
+            hideProgressBar();
             isConnected.set(true);
         }
     };
@@ -45,10 +40,10 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
         }
     };
 
-    private Consumer<OffsetAndLimit> doOnScroll = new Consumer<OffsetAndLimit>() {
+    private Consumer<Integer> doOnScroll = new Consumer<Integer>() {
         @Override
-        public void accept(OffsetAndLimit offsetAndLimit) {
-            offset = offsetAndLimit.getOffset();
+        public void accept(Integer integer) {
+            offset = integer;
             getData();
         }
     };
@@ -79,13 +74,13 @@ public class TypesListViewModel extends BaseViewModel<TypesListRouter> {
                         .subscribe(doOnNext, doOnError));
     }
 
-    public void subscribeScrolledItems(Observable<OffsetAndLimit> observable) {
+    public void subscribeScrolledItems(Observable<Integer> observable) {
         getCompositeDisposable().add(
                 observable
-                        .filter(new Predicate<OffsetAndLimit>() {
+                        .filter(new Predicate<Integer>() {
                             @Override
-                            public boolean test(OffsetAndLimit offsetAndLimit) {
-                                return offset < offsetAndLimit.getOffset();
+                            public boolean test(Integer integer) {
+                                return offset < integer;
                             }
                         })
                         .subscribe(doOnScroll, doOnError));

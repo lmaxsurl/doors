@@ -9,7 +9,10 @@
             type="ru.mail1998.logunov.maxim.doors.presentation.screens.type.TypesListViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
+    <android.support.constraint.ConstraintLayout
+        style="@style/AppConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
@@ -21,13 +24,13 @@
             android:layout_marginBottom="@dimen/app_margin"
             android:contentDescription="@string/sad_face"
             android:visibility="@{!viewModel.isConnected}"
-            app:layout_constraintBottom_toTopOf="@+id/message_tv"
+            app:layout_constraintBottom_toTopOf="@id/message_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/message_tv"
-            style="@style/ErrorEditText"
+            style="@style/ErrorTextView"
             android:text="@{viewModel.errorMessage}"
             android:visibility="@{!viewModel.isConnected}"
             app:layout_constraintBottom_toBottomOf="parent"

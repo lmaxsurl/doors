@@ -22,5 +22,6 @@
     <string name="mts_number">MTC: +375336339291</string>
     <string name="velcom_number">Velcom: +375296798750</string>
     <string name="icons8">App icons by icons8</string>
-    <string name="search">Search</string>
+    <string name="search">Найти</string>
+    <string name="no_data_requested">По вашему запросу ничего не найдено</string>
 </resources>

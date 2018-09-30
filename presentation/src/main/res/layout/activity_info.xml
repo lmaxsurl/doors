@@ -10,9 +10,9 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        style="@style/AppConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
@@ -22,18 +22,24 @@
         <TextView
             android:id="@+id/textView3"
             style="@style/InfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/shop_address"
             app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
         <TextView
             android:id="@+id/textView4"
             style="@style/InfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/working_hours"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView5"
             style="@style/InfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/open_hours"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -46,6 +52,8 @@
         <TextView
             android:id="@+id/textView7"
             style="@style/InfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/phone"
             app:layout_constraintTop_toBottomOf="@id/textView6" />
 

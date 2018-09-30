@@ -30,7 +30,7 @@ public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
         progressBar.set(true);
     }
 
-    public void dismissProgressBar() {
+    public void hideProgressBar() {
         progressBar.set(false);
     }
 

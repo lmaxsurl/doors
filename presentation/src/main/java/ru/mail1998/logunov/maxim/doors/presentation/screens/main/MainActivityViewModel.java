@@ -1,20 +1,7 @@
 package ru.mail1998.logunov.maxim.doors.presentation.screens.main;
 
-import android.view.View;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import ru.mail1998.logunov.maxim.doors.R;
 import ru.mail1998.logunov.maxim.doors.app.App;
 import ru.mail1998.logunov.maxim.doors.presentation.base.BaseViewModel;
-import ru.mail1998.logunov.maxim.doors.presentation.utils.Extras;
 
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_CLASS;
 import static ru.mail1998.logunov.maxim.doors.presentation.utils.Extras.METAL_DOOR_TYPES;
@@ -28,7 +15,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityRouter> {
     }
 
     public MainActivityViewModel() {
-        dismissProgressBar();
+        hideProgressBar();
     }
 
     public void onWoodDoorClick(){

@@ -15,7 +15,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public class AutoLoadingRecyclerView extends RecyclerView {
 
-    private PublishSubject<OffsetAndLimit> scrolledItemsSubject = PublishSubject.create();
+    private PublishSubject<Integer> scrolledItemsSubject = PublishSubject.create();
     private int limit;
 
     public AutoLoadingRecyclerView(Context context) {
@@ -46,7 +46,7 @@ public class AutoLoadingRecyclerView extends RecyclerView {
                 int updatePosition = getAdapter().getItemCount() - 1 - (limit / 2);
                 if (position >= updatePosition) {
                     int offset = getAdapter().getItemCount();
-                    scrolledItemsSubject.onNext(new OffsetAndLimit(offset, limit));
+                    scrolledItemsSubject.onNext(offset);
                 }
             }
         });
@@ -82,7 +82,7 @@ public class AutoLoadingRecyclerView extends RecyclerView {
         this.limit = limit;
     }
 
-    public Observable<OffsetAndLimit> observeScrolledData() {
+    public Observable<Integer> observeScrolledData() {
         return scrolledItemsSubject;
     }
 }

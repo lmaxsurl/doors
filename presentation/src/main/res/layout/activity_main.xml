@@ -9,7 +9,10 @@
             type="ru.mail1998.logunov.maxim.doors.presentation.screens.main.MainActivityViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout style="@style/AppConstraintLayout">
+    <android.support.constraint.ConstraintLayout
+        style="@style/AppConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
@@ -18,10 +21,11 @@
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/wood_doors"
-            style="@style/MainScreenTextView"
+            style="@style/AppTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onWoodDoorClick()}"
             android:text="@string/wood_door"
-            android:drawableStart="@drawable/wood_door"
             app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
         <View
@@ -31,10 +35,11 @@
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/metal_doors"
-            style="@style/MainScreenTextView"
+            style="@style/AppTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onMetalDoorClick()}"
             android:text="@string/metal_door"
-            android:drawableStart="@drawable/metal_door"
             app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
         <View
@@ -44,10 +49,11 @@
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/map"
-            style="@style/MainScreenTextView"
+            style="@style/AppTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onMapClick()}"
             android:text="@string/we_on_map"
-            android:drawableStart="@drawable/map"
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <View
@@ -57,10 +63,11 @@
 
         <ru.mail1998.logunov.maxim.doors.custom.FixedSizeTextView
             android:id="@+id/about_us"
-            style="@style/MainScreenTextView"
+            style="@style/AppTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onInfoClick()}"
             android:text="@string/about_us"
-            android:drawableStart="@drawable/info"
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <View
