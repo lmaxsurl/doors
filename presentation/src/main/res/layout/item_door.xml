@@ -21,8 +21,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/door_image"
             android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.imageUrl}"
-            app:error="@{@drawable/error}"/>
+            app:imageUrl="@{viewModel.imageUrl}"/>
 
         <TextView
             android:id="@+id/textView"

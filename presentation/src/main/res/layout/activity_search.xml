@@ -85,7 +85,7 @@
             android:background="@color/backgroundColor"
             android:visibility="@{viewModel.showDoor}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/door_list_rv">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ProgressBar
                 android:layout_width="wrap_content"
@@ -97,7 +97,6 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/door_image"
                 android:scaleType="fitCenter"
-                app:error="@{@drawable/error}"
                 app:imageUrl="@{viewModel.doorUrl}" />
         </FrameLayout>
 

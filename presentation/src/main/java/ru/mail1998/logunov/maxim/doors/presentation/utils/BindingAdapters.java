@@ -12,11 +12,10 @@ import ru.mail1998.logunov.maxim.doors.R;
 
 public class BindingAdapters {
 
-    @BindingAdapter({"imageUrl", "error"})
-    public static void loadImage(ImageView view, String url, Drawable error) {
+    @BindingAdapter("imageUrl")
+    public static void loadImage(ImageView view, String url) {
         Picasso.get()
                 .load(url)
-                .error(error)
                 .into(view);
     }
 
